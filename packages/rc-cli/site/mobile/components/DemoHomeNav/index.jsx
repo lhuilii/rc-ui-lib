@@ -10,6 +10,7 @@ const DemoHomeNav = (props) => {
   const navigate = useNavigate();
 
   const base = useMemo(() => {
+    // 如果 lang 存在，使用 lang；否则返回空字符串（表示根路径）
     return lang ? `/${lang}` : '';
   }, [lang]);
 
