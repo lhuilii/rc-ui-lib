@@ -4,22 +4,8 @@ import { components } from 'site-mobile-demo';
 import { Toast, Button, Grid, Popup, Cell, Picker } from '../..';
 import { PopoverInstance, PopoverPlacement } from '../PropsType';
 import Popover from '..';
+import { usePopoverDemoI18n } from './locale';
 import './style.less';
-
-const actions = [{ text: '选项一' }, { text: '选项二' }, { text: '选项三' }];
-const popupActions = [{ text: '选项一' }, { text: '选项二' }];
-
-const iconActions = [
-  { text: '选项一', icon: 'add-o' },
-  { text: '选项二', icon: 'music-o' },
-  { text: '选项三', icon: 'more-o' },
-];
-
-const disabledActions = [
-  { text: '选项一', disabled: true },
-  { text: '选项二', disabled: true },
-  { text: '选项三' },
-];
 
 const placements = [
   'top',
@@ -38,6 +24,21 @@ const placements = [
 
 export default (): React.ReactNode => {
   const { DemoBlock, DemoSection } = components;
+  const t = usePopoverDemoI18n();
+  const actions = [{ text: t.action1 }, { text: t.action2 }, { text: t.action3 }];
+  const popupActions = [{ text: t.action1 }, { text: t.action2 }];
+
+  const iconActions = [
+    { text: t.action1, icon: 'add-o' },
+    { text: t.action2, icon: 'music-o' },
+    { text: t.action3, icon: 'more-o' },
+  ];
+
+  const disabledActions = [
+    { text: t.action1, disabled: true },
+    { text: t.action2, disabled: true },
+    { text: t.action3 },
+  ];
   const popover = useRef<PopoverInstance>(null);
   const popover1 = useRef<PopoverInstance>(null);
   const popover2 = useRef<PopoverInstance>(null);
@@ -52,22 +53,22 @@ export default (): React.ReactNode => {
   };
   return (
     <DemoSection className="demo-slider">
-      <DemoBlock title="基础用法">
+      <DemoBlock title={t.demoTitleBasic}>
         <Popover
           placement="bottom-start"
           actions={actions}
           onSelect={select}
-          reference={<Button type="primary">浅色风格</Button>}
+          reference={<Button type="primary">{t.buttonLight}</Button>}
         />
         <Popover
           actions={actions}
           theme="dark"
           onSelect={select}
-          reference={<Button type="primary">深色风格</Button>}
+          reference={<Button type="primary">{t.buttonDark}</Button>}
         />
       </DemoBlock>
-      <DemoBlock card title="弹出位置">
-        <Cell title="选择弹出位置" onClick={() => setVisible(true)} isLink />
+      <DemoBlock card title={t.demoTitlePlacement}>
+        <Cell title={t.cellSelectPlacement} onClick={() => setVisible(true)} isLink />
         <Popup round position="bottom" visible={visible} onClose={() => setVisible(false)}>
           <div className="demo-popover-box">
             <Popover
@@ -82,24 +83,24 @@ export default (): React.ReactNode => {
           <Picker showToolbar={false} columns={placements} onChange={onPickerChange} />
         </Popup>
       </DemoBlock>
-      <DemoBlock title="选项配置">
+      <DemoBlock title={t.demoTitleOptions}>
         <Popover
           placement="bottom-start"
           actions={iconActions}
           onSelect={select}
-          reference={<Button type="primary">展示图标</Button>}
+          reference={<Button type="primary">{t.buttonIcon}</Button>}
         />
         <Popover
           actions={disabledActions}
           onSelect={select}
-          reference={<Button type="primary">禁用选项</Button>}
+          reference={<Button type="primary">{t.buttonDisabled}</Button>}
         />
       </DemoBlock>
-      <DemoBlock title="自定义内容">
+      <DemoBlock title={t.demoTitleCustomContent}>
         <Popover
           ref={popover1}
           placement="top-start"
-          reference={<Button type="primary">自定义内容</Button>}
+          reference={<Button type="primary">{t.buttonCustomContent}</Button>}
         >
           <Grid square border={false} columnNum={3} style={{ width: 240 }}>
             {Array.from({ length: 6 }, (_, i) => (
@@ -107,23 +108,23 @@ export default (): React.ReactNode => {
                 onClick={() => popover1.current?.hide()}
                 key={i}
                 icon="photo-o"
-                text="文字"
+              text={t.gridText}
               />
             ))}
           </Grid>
         </Popover>
       </DemoBlock>
-      <DemoBlock title="手动控制">
+      <DemoBlock title={t.demoTitleManual}>
         <Popover
           placement="bottom-start"
           trigger="manual"
           ref={popover2}
           actions={iconActions}
           onSelect={select}
-          reference={<Button type="primary">展示图标</Button>}
+          reference={<Button type="primary">{t.buttonIcon}</Button>}
         />
-        <Button onClick={() => popover2.current?.show()}>显示</Button>
-        <Button onClick={() => popover2.current?.hide()}>关闭</Button>
+        <Button onClick={() => popover2.current?.show()}>{t.buttonShow}</Button>
+        <Button onClick={() => popover2.current?.hide()}>{t.buttonHide}</Button>
       </DemoBlock>
     </DemoSection>
   );

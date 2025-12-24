@@ -3,36 +3,38 @@ import { useNavigate } from 'react-router-dom';
 import { components } from 'site-mobile-demo';
 import NavBar from '..';
 import { Toast, Icon } from '../..';
+import { useNavBarDemoI18n } from './locale';
 import './style.less';
 
 export default (): React.ReactNode => {
   const navigate = useNavigate();
   const { DemoBlock, DemoSection } = components;
+  const t = useNavBarDemoI18n();
   const onClickLeft = () => navigate(-1);
 
-  const onClickRight = () => Toast('按钮');
+  const onClickRight = () => Toast(t.toastButton);
   return (
     <DemoSection>
-      <DemoBlock title="基础用法">
-        <NavBar title="标题" />
+      <DemoBlock title={t.demoTitleBasic}>
+        <NavBar title={t.title} />
       </DemoBlock>
-      <DemoBlock title="返回上级">
-        <NavBar title="标题" leftArea="返回" leftArrow onClickLeft={onClickLeft} />
+      <DemoBlock title={t.demoTitleBack}>
+        <NavBar title={t.title} leftArea={t.back} leftArrow onClickLeft={onClickLeft} />
       </DemoBlock>
-      <DemoBlock title="右侧按钮">
+      <DemoBlock title={t.demoTitleRight}>
         <NavBar
-          title="标题"
-          leftArea="返回"
-          rightArea="按钮"
+          title={t.title}
+          leftArea={t.back}
+          rightArea={t.button}
           left-arrow
           onClickLeft={onClickLeft}
           onClickRight={onClickRight}
         />
       </DemoBlock>
-      <DemoBlock title="自定义区域">
+      <DemoBlock title={t.demoTitleCustom}>
         <NavBar
-          title="标题"
-          left-text="返回"
+          title={t.title}
+          left-text={t.back}
           leftArrow
           rightArea={<Icon name="search" size="18" />}
         />

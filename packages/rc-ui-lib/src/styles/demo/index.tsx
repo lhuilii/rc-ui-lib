@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { components } from 'site-mobile-demo';
 import { CSSTransition } from 'react-transition-group';
 import { Cell } from '../..';
+import { useStylesDemoI18n } from './locale';
 import './style.less';
 
 export default (): React.ReactNode => {
   const { DemoBlock, DemoSection } = components;
+  const t = useStylesDemoI18n();
 
   const [show, setShow] = useState(false);
   const [transition, setTransition] = useState('');
@@ -21,21 +23,19 @@ export default (): React.ReactNode => {
 
   return (
     <DemoSection>
-      <DemoBlock title="文字省略">
-        <div className="rc-ellipsis">这是一段最多显示一行的文字，后面的内容会省略</div>
-        <div className="rc-multi-ellipsis--l2">
-          这是一段最多显示两行的文字，后面的内容会省略。这是一段最多显示两行的文字，后面的内容会省略
-        </div>
+      <DemoBlock title={t.demoTitleEllipsis}>
+        <div className="rc-ellipsis">{t.ellipsisSingle}</div>
+        <div className="rc-multi-ellipsis--l2">{t.ellipsisDouble}</div>
       </DemoBlock>
-      <DemoBlock card title="1px 边框">
+      <DemoBlock card title={t.demoTitleHairline}>
         <div className="rc-hairline--top" />
       </DemoBlock>
-      <DemoBlock card title="动画">
-        <Cell isLink title="Fade" onClick={() => animate('rc-fade')} />
-        <Cell isLink title="Slide Up" onClick={() => animate('rc-slide-up')} />
-        <Cell isLink title="Slide Down" onClick={() => animate('rc-slide-down')} />
-        <Cell isLink title="Slide Left" onClick={() => animate('rc-slide-left')} />
-        <Cell isLink title="Slide Right" onClick={() => animate('rc-slide-right')} />
+      <DemoBlock card title={t.demoTitleAnimation}>
+        <Cell isLink title={t.cellFade} onClick={() => animate('rc-fade')} />
+        <Cell isLink title={t.cellSlideUp} onClick={() => animate('rc-slide-up')} />
+        <Cell isLink title={t.cellSlideDown} onClick={() => animate('rc-slide-down')} />
+        <Cell isLink title={t.cellSlideLeft} onClick={() => animate('rc-slide-left')} />
+        <Cell isLink title={t.cellSlideRight} onClick={() => animate('rc-slide-right')} />
       </DemoBlock>
 
       <CSSTransition in={show} timeout={300} classNames={transition} unmountOnExit>

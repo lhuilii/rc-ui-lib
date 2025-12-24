@@ -3,10 +3,12 @@ import { components } from 'site-mobile-demo';
 import { CurrentTime } from '../../hooks/use-count-down';
 import { CountDown, Grid } from '../..';
 import { CountDownInstance } from '../PropsType';
+import { useCountDownDemoI18n } from './locale';
 import './style.less';
 
 export default (): React.ReactNode => {
   const { DemoBlock, DemoSection } = components;
+  const t = useCountDownDemoI18n();
   const [time] = useState(30 * 60 * 60 * 1000);
   const CountDownRef = useRef<CountDownInstance>(null);
 
@@ -33,24 +35,30 @@ export default (): React.ReactNode => {
 
   return (
     <DemoSection className="demo-count-down">
-      <DemoBlock title="基础用法">
+      <DemoBlock title={t.demoTitleBasic}>
         <CountDown time={time} />
       </DemoBlock>
-      <DemoBlock title="自定义格式">
-        <CountDown time={time} format="DD 天 HH 时 mm 分 ss 秒" />
+      <DemoBlock title={t.demoTitleFormat}>
+        <CountDown time={time} format={t.format} />
       </DemoBlock>
-      <DemoBlock title="毫秒级渲染">
-        <CountDown millisecond time={time} format="HH:mm:ss:SS" />
+      <DemoBlock title={t.demoTitleMillisecond}>
+        <CountDown millisecond time={time} format={t.millisecondFormat} />
       </DemoBlock>
-      <DemoBlock title="自定义样式">
+      <DemoBlock title={t.demoTitleCustom}>
         <CountDown time={time} renderChildren={renderChildren} />
       </DemoBlock>
-      <DemoBlock title="手动控制">
-        <CountDown autoStart={false} millisecond format="ss:SSS" time="3000" ref={CountDownRef} />
+      <DemoBlock title={t.demoTitleControl}>
+        <CountDown
+          autoStart={false}
+          millisecond
+          format={t.controlFormat}
+          time="3000"
+          ref={CountDownRef}
+        />
         <Grid columnNum={3}>
-          <Grid.Item icon="play-circle-o" text="开始" onClick={start} />
-          <Grid.Item icon="pause-circle-o" text="暂停" onClick={pause} />
-          <Grid.Item icon="replay" text="重置" onClick={reset} />
+          <Grid.Item icon="play-circle-o" text={t.start} onClick={start} />
+          <Grid.Item icon="pause-circle-o" text={t.pause} onClick={pause} />
+          <Grid.Item icon="replay" text={t.reset} onClick={reset} />
         </Grid>
       </DemoBlock>
     </DemoSection>

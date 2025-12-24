@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { components } from 'site-mobile-demo';
 import { Cell, Toast, ImagePreview } from '../..';
+import { useImagePreviewDemoI18n } from './locale';
 import './style.less';
 
 const images = [
@@ -11,45 +12,46 @@ const images = [
 
 export default (): React.ReactNode => {
   const { DemoBlock, DemoSection } = components;
+  const t = useImagePreviewDemoI18n();
   const [visible, setVisible] = useState(false);
   return (
     <DemoSection>
-      <DemoBlock card title="基础用法">
-        <Cell title="预览图片" isLink onClick={() => ImagePreview.open({ images })} />
+      <DemoBlock card title={t.demoTitleBasic}>
+        <Cell title={t.cellPreviewImage} isLink onClick={() => ImagePreview.open({ images })} />
       </DemoBlock>
-      <DemoBlock card title="传入配置项">
+      <DemoBlock card title={t.demoTitleOptions}>
         <Cell
-          title="指定初始位置"
+          title={t.cellStartPosition}
           isLink
           onClick={() => ImagePreview.open({ images, startPosition: 2 })}
         />
         <Cell
-          title="展示关闭按钮"
+          title={t.cellShowClose}
           isLink
           onClick={() => ImagePreview.open({ images, startPosition: 2, closeable: true })}
         />
         <Cell
-          title="监听关闭事件"
+          title={t.cellOnClose}
           isLink
           onClick={() =>
             ImagePreview.open({
               images,
               startPosition: 2,
               onClose: () => {
-                Toast.info('关闭预览');
+                Toast.info(t.toastClosePreview);
               },
             })
           }
         />
         <Cell
-          title="展示指示点"
+          title={t.cellIndicators}
           isLink
           onClick={() => ImagePreview.open({ images, showIndicators: true, showIndex: false })}
         />
       </DemoBlock>
-      <DemoBlock card title="异步关闭">
+      <DemoBlock card title={t.demoTitleAsync}>
         <Cell
-          title="预览图片"
+          title={t.cellPreviewImage}
           isLink
           onClick={() => {
             const destory = () => ImagePreview.open({ images });
@@ -57,8 +59,8 @@ export default (): React.ReactNode => {
           }}
         />
       </DemoBlock>
-      <DemoBlock card title="组件调用">
-        <Cell title="组件调用" isLink onClick={() => setVisible(true)} />
+      <DemoBlock card title={t.demoTitleComponent}>
+        <Cell title={t.cellComponent} isLink onClick={() => setVisible(true)} />
       </DemoBlock>
       <ImagePreview
         visible={visible}

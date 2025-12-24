@@ -2,11 +2,13 @@ import React, { useRef, useState } from 'react';
 import { components } from 'site-mobile-demo';
 import { Toast, Field, Popup } from '../..';
 import Picker from '..';
+import { usePickerDemoI18n } from './locale';
 
 export default (): React.ReactNode => {
   const { DemoBlock, DemoSection } = components;
+  const t = usePickerDemoI18n();
 
-  const picker = useRef(null);
+  const picker = useRef<any>(null);
 
   const [fieldValue, setFieldValue] = useState('');
   const [showPicker, setShowPicker] = useState(false);
@@ -17,34 +19,29 @@ export default (): React.ReactNode => {
     福建: ['福州', '厦门', '莆田', '三明', '泉州'],
   };
 
+  const onChangeToast = (value: string, index: number) =>
+    Toast(`${t.toastCurrent}${JSON.stringify(value)}, ${t.toastIndex}${index}`);
+
   return (
     <DemoSection>
-      <DemoBlock card title="基础用法">
+      <DemoBlock card title={t.demoTitleBasic}>
         <Picker
-          title="标题"
+          title={t.title}
           columns={[
             { text: '杭州' },
             { text: '宁波' },
             { text: '温州', disabled: true },
             { text: '嘉兴', disabled: true },
           ]}
-          onChange={(value: string, index: number) =>
-            Toast(`当前值：${JSON.stringify(value)}, 当前索引：${index}`)
-          }
-          onCancel={() => Toast.info('点击取消按钮')}
-          onConfirm={() => Toast.info('点击确认按钮')}
+          onChange={onChangeToast}
+          onCancel={() => Toast.info(t.toastCancel)}
+          onConfirm={() => Toast.info(t.toastConfirm)}
         />
       </DemoBlock>
-      <DemoBlock card title="默认选中">
-        <Picker
-          columns={columns}
-          defaultIndex={2}
-          onChange={(value: string, index: number) =>
-            Toast(`当前值：${JSON.stringify(value)}, 当前索引：${index}`)
-          }
-        />
+      <DemoBlock card title={t.demoTitleDefaultIndex}>
+        <Picker columns={columns} defaultIndex={2} onChange={onChangeToast} />
       </DemoBlock>
-      <DemoBlock card title="多列选择">
+      <DemoBlock card title={t.demoTitleMultiple}>
         <Picker
           onChange={(value: string, index: number) => {
             console.log(value, index);
@@ -54,7 +51,6 @@ export default (): React.ReactNode => {
               values: ['周一', '周二', '周三', '周四', '周五'],
               defaultIndex: 2,
             },
-            // 第二列
             {
               values: ['上午', '下午', '晚上'],
               defaultIndex: 1,
@@ -62,7 +58,7 @@ export default (): React.ReactNode => {
           ]}
         />
       </DemoBlock>
-      <DemoBlock card title="级联选择">
+      <DemoBlock card title={t.demoTitleCascade}>
         <Picker
           onChange={(value: string, index: number) => {
             console.log(value, index);
@@ -98,10 +94,10 @@ export default (): React.ReactNode => {
           ]}
         />
       </DemoBlock>
-      <DemoBlock card title="禁用选项">
+      <DemoBlock card title={t.demoTitleDisabled}>
         <Picker columns={[{ text: '南京', disabled: true }, { text: '苏州' }, { text: '扬州' }]} />
       </DemoBlock>
-      <DemoBlock card title="动态选项设置">
+      <DemoBlock card title={t.demoTitleDynamic}>
         <Picker
           ref={picker}
           columns={[{ values: Object.keys(cities) }, { values: cities['浙江'], defaultIndex: 2 }]}
@@ -110,7 +106,7 @@ export default (): React.ReactNode => {
           }}
         />
       </DemoBlock>
-      <DemoBlock card title="加载状态">
+      <DemoBlock card title={t.demoTitleLoading}>
         <Picker
           loading
           columns={[
@@ -118,7 +114,6 @@ export default (): React.ReactNode => {
               values: ['周一', '周二', '周三', '周四', '周五'],
               defaultIndex: 2,
             },
-            // 第二列
             {
               values: ['上午', '下午', '晚上'],
               defaultIndex: 1,
@@ -126,19 +121,19 @@ export default (): React.ReactNode => {
           ]}
         />
       </DemoBlock>
-      <DemoBlock card title="搭配弹出层使用">
+      <DemoBlock card title={t.demoTitleWithPopup}>
         <Field
           readonly
           clickable
-          label="城市"
+          label={t.fieldLabelCity}
           value={fieldValue}
-          placeholder="选择城市"
+          placeholder={t.fieldPlaceholderCity}
           onClick={() => setShowPicker(true)}
         />
       </DemoBlock>
       <Popup round visible={showPicker} position="bottom" onClose={() => setShowPicker(false)}>
         <Picker
-          title="标题"
+          title={t.title}
           onConfirm={(value: string) => {
             setFieldValue(value);
             setShowPicker(false);
@@ -146,9 +141,9 @@ export default (): React.ReactNode => {
           columns={columns}
         />
       </Popup>
-      <DemoBlock card title="自定义Columns结构">
+      <DemoBlock card title={t.demoTitleCustomColumns}>
         <Picker
-          title="标题"
+          title={t.title}
           columnsFieldNames={{
             text: 'cityName',
             children: 'cities',

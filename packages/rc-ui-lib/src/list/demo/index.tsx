@@ -7,6 +7,7 @@ import PullRefresh from '../../pull-refresh';
 
 import './style.less';
 import { ListInstance } from '../PropsType';
+import { useListDemoI18n } from './locale';
 
 async function getData(throwError?) {
   return new Promise<number[]>((resolve, reject) => {
@@ -21,6 +22,7 @@ async function getData(throwError?) {
 
 export default (): React.ReactNode => {
   const { DemoSection } = components;
+  const t = useListDemoI18n();
 
   const listRef = useRef<ListInstance>(null);
   const [list, setList] = useState<Array<number>>([]);
@@ -70,7 +72,7 @@ export default (): React.ReactNode => {
   return (
     <DemoSection>
       <Tabs sticky onChange={() => setFinished(false)}>
-        <Tabs.TabPane title="基本用法">
+        <Tabs.TabPane title={t.tabTitleBasic}>
           <List finished={finished} onLoad={onLoad}>
             {list.length
               ? list.map((_, i) => {
@@ -79,8 +81,8 @@ export default (): React.ReactNode => {
               : null}
           </List>
         </Tabs.TabPane>
-        <Tabs.TabPane title="错误提示">
-          <List finished={finished} errorText="请求失败，点击重新加载" onLoad={onLoadError}>
+        <Tabs.TabPane title={t.tabTitleError}>
+          <List finished={finished} errorText={t.errorText} onLoad={onLoadError}>
             {errorList.length
               ? errorList.map((_, i) => {
                   return <Cell key={i} title={i + 1} />;
@@ -88,7 +90,7 @@ export default (): React.ReactNode => {
               : null}
           </List>
         </Tabs.TabPane>
-        <Tabs.TabPane title="下拉刷新">
+        <Tabs.TabPane title={t.tabTitleRefresh}>
           <PullRefresh onRefresh={onRefresh}>
             <List ref={listRef} finished={finished} onLoad={onLoadRefresh}>
               {refreshList.length

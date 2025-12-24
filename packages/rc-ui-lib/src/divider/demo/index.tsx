@@ -1,28 +1,30 @@
 import React from 'react';
 import { components } from 'site-mobile-demo';
 import { Divider } from '../..';
+import { useDividerDemoI18n } from './locale';
 import './style.less';
 
 export default (): React.ReactNode => {
   const { DemoBlock, DemoSection } = components;
+  const t = useDividerDemoI18n();
   return (
     <DemoSection className="demo-divider">
-      <DemoBlock title="基础用法">
+      <DemoBlock title={t.demoTitleBasic}>
         <Divider />
       </DemoBlock>
-      <DemoBlock title="展示文字">
-        <Divider>文字</Divider>
+      <DemoBlock title={t.demoTitleText}>
+        <Divider>{t.text}</Divider>
       </DemoBlock>
-      <DemoBlock title="内容位置">
-        <Divider contentPosition="left">文字</Divider>
-        <Divider contentPosition="right">文字</Divider>
+      <DemoBlock title={t.demoTitleContentPosition}>
+        <Divider contentPosition="left">{t.text}</Divider>
+        <Divider contentPosition="right">{t.text}</Divider>
       </DemoBlock>
-      <DemoBlock title="虚线">
-        <Divider dashed>文字</Divider>
+      <DemoBlock title={t.demoTitleDashed}>
+        <Divider dashed>{t.text}</Divider>
       </DemoBlock>
-      <DemoBlock title="自定义样式">
+      <DemoBlock title={t.demoTitleCustom}>
         <Divider style={{ color: '#1989fa', borderColor: '#1989fa', padding: '0 16px' }}>
-          文字
+          {t.text}
         </Divider>
       </DemoBlock>
     </DemoSection>

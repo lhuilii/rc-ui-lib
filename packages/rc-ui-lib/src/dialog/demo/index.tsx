@@ -2,23 +2,25 @@
 import React, { useState } from 'react';
 import { components } from 'site-mobile-demo';
 import { Dialog, Cell, Toast } from '../..';
+import { useDialogDemoI18n } from './locale';
 
 import './style.less';
 
 export default (): React.ReactNode => {
   const { DemoBlock, DemoSection } = components;
+  const t = useDialogDemoI18n();
   const [show, setShow] = useState(false);
 
   return (
     <DemoSection>
-      <DemoBlock card title="基础用法">
+      <DemoBlock card title={t.demoTitleBasic}>
         <Cell
-          title="弹窗提示"
+          title={t.cellAlert}
           isLink
           onClick={() =>
             Dialog.confirm({
-              title: '标题',
-              message: '代码是写出来给人看的，附带能在机器上运行',
+              title: t.title,
+              message: t.message,
               onConfirm: () => console.log('onConfirm'),
               onCancel: () => console.log('onCancel'),
               onClosed: () => console.log('onClosed'),
@@ -26,45 +28,45 @@ export default (): React.ReactNode => {
           }
         />
         <Cell
-          title="弹窗提示（无标题）"
+          title={t.cellAlertNoTitle}
           isLink
           onClick={() =>
             Dialog.alert({
-              message: '代码是写出来给人看的，附带能在机器上运行',
+              message: t.message,
             })
           }
         />
         <Cell
-          title="确认弹框"
+          title={t.cellConfirm}
           isLink
           onClick={() =>
             Dialog.confirm({
-              title: '标题',
-              message: '代码是写出来给人看的，附带能在机器上运行',
+              title: t.title,
+              message: t.message,
             })
           }
         />
       </DemoBlock>
-      <DemoBlock card title="Promise调用">
+      <DemoBlock card title={t.demoTitlePromise}>
         <Cell
-          title="Dialog.alert"
+          title={t.cellAlertText}
           isLink
           onClick={async () => {
             await Dialog.alert({
-              title: '标题',
-              message: '代码是写出来给人看的，附带能在机器上运行',
+              title: t.title,
+              message: t.message,
             });
             console.log('confirm');
           }}
         />
         <Cell
-          title="Dialog.confirm"
+          title={t.cellConfirmText}
           isLink
           onClick={async () => {
             try {
               await Dialog.confirm({
-                title: '标题',
-                message: '代码是写出来给人看的，附带能在机器上运行',
+                title: t.title,
+                message: t.message,
               });
               console.log('confirm');
             } catch (error) {
@@ -73,102 +75,103 @@ export default (): React.ReactNode => {
           }}
         />
       </DemoBlock>
-      <DemoBlock card title="圆角按钮样式">
+      <DemoBlock card title={t.demoTitleRoundButton}>
         <Cell
-          title="圆角按钮弹窗"
+          title={t.cellRoundButton}
           isLink
           onClick={() =>
             Dialog.alert({
-              title: '标题',
+              title: t.title,
               theme: 'round-button',
               showCancelButton: true,
-              message: '代码是写出来给人看的，附带能在机器上运行',
+              message: t.message,
             })
           }
         />
         <Cell
-          title="圆角按钮弹窗（无标题）"
+          title={t.cellRoundButtonNoTitle}
           isLink
           onClick={() =>
             Dialog.alert({
-              message: '代码是写出来给人看的，附带能在机器上运行',
+              message: t.message,
               theme: 'round-button',
             })
           }
         />
       </DemoBlock>
-      <DemoBlock card title="完全关闭后的回调">
+      <DemoBlock card title={t.demoTitleOnClosed}>
         <Cell
-          title="弹窗提示"
+          title={t.cellOnClosed}
           isLink
           onClick={() =>
             Dialog.alert({
-              title: '标题',
-              message: '代码是写出来给人看的，附带能在机器上运行',
+              title: t.title,
+              message: t.message,
               onClosed: () => console.log('onClosed'),
             })
           }
         />
       </DemoBlock>
-      <DemoBlock card title="关闭图标">
+      <DemoBlock card title={t.demoTitleCloseIcon}>
         <Cell
-          title="关闭图标"
+          title={t.cellCloseIcon}
           isLink
           onClick={() =>
             Dialog.alert({
-              title: '标题',
+              title: t.title,
               closeable: true,
               theme: 'round-button',
-              message: '代码是写出来给人看的，附带能在机器上运行',
+              message: t.message,
             })
           }
         />
         <Cell
-          title="自定义关闭图标"
+          title={t.cellCustomCloseIcon}
           isLink
           onClick={() =>
             Dialog.alert({
-              title: '标题',
+              title: t.title,
               closeable: true,
               closeIcon: 'close',
               theme: 'round-button',
-              message: '代码是写出来给人看的，附带能在机器上运行',
+              message: t.message,
             })
           }
         />
       </DemoBlock>
-      <DemoBlock card title="自定义内容">
+      <DemoBlock card title={t.demoTitleCustom}>
         <Cell
-          title="自定义内容"
+          title={t.cellCustomContent}
           isLink
           onClick={() =>
             Dialog.alert({
-              title: '标题',
+              title: t.title,
               closeable: true,
               theme: 'round-button',
               message: (
                 <div style={{ textAlign: 'center', margin: '16px' }}>
-                  自定义内容：代码是写出来给人看的，附带能在机器上运行
+                  {t.customMessagePrefix}
+                  {t.message}
                 </div>
               ),
             })
           }
         />
       </DemoBlock>
-      <DemoBlock card title="异步关闭">
+      <DemoBlock card title={t.demoTitleAsync}>
         <Cell
-          title="异步关闭"
+          title={t.cellAsync}
           isLink
           onClick={() =>
             Dialog.show({
-              title: '标题',
-              message: '弹窗内容',
+              title: t.title,
+              message: t.asyncMessage,
               showCancelButton: true,
               onCancel: () => {
                 return new Promise((res) => {
                   setTimeout(() => {
                     res(true);
-                    Toast.success({ message: '取消按钮异步' });
+                    Toast.success({ message: t.asyncCancelToast });
                   }, 3000);
                 });
               },
@@ -176,7 +179,7 @@ export default (): React.ReactNode => {
                 return new Promise((res) => {
                   setTimeout(() => {
                     res(true);
-                    Toast.success({ message: '确认按钮异步' });
+                    Toast.success({ message: t.asyncConfirmToast });
                   }, 3000);
                 });
               },
@@ -185,16 +188,16 @@ export default (): React.ReactNode => {
         />
       </DemoBlock>
 
-      <DemoBlock card title="组件调用">
-        <Cell title="组件调用" isLink onClick={() => setShow(true)} />
+      <DemoBlock card title={t.demoTitleComponent}>
+        <Cell title={t.cellComponent} isLink onClick={() => setShow(true)} />
       </DemoBlock>
 
       <Dialog
         visible={show}
-        title="标题"
+        title={t.title}
         showCancelButton
         onConfirm={() => {
-          Toast.info('点击确认按钮');
+          Toast.info(t.confirmButtonToast);
           setShow(false);
         }}
         onCancel={() => setShow(false)}

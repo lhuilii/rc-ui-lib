@@ -662,6 +662,323 @@ export default {
           },
         ],
       },
+      'en-US': {
+        title: 'RC-UI-LIB',
+        description: 'Lightweight and reliable mobile component library',
+        logo: 'https://rancui.github.io/rc-ui-lib/rc-ui-lib.png',
+        langLabel: 'English',
+        links: [
+          {
+            logo: 'https://b.yzcdn.cn/vant/logo/github.svg',
+            url: 'https://github.com/rancui/rc-ui-lib',
+          },
+        ],
+        nav: [
+          {
+            title: 'Development Guide',
+            items: [
+              {
+                path: 'home',
+                title: 'Introduction',
+              },
+              {
+                path: 'quickstart',
+                title: 'Quickstart',
+              },
+              {
+                path: 'advanced-usage',
+                title: 'Advanced Usage',
+              },
+              {
+                path: 'changelog',
+                title: 'Changelog',
+              },
+              {
+                path: 'theme',
+                title: 'Theme Customization',
+              },
+              {
+                path: 'contribution',
+                title: 'Contribution Guide',
+              },
+            ],
+          },
+          {
+            title: 'Layout Components',
+            items: [
+              {
+                path: 'flex',
+                title: 'Flex Layout',
+              },
+            ],
+          },
+          {
+            title: 'Basic Components',
+            items: [
+              {
+                path: 'button',
+                title: 'Button',
+              },
+              {
+                path: 'cell',
+                title: 'Cell',
+              },
+              {
+                path: 'config-provider',
+                title: 'ConfigProvider',
+              },
+              {
+                path: 'typography',
+                title: 'Typography',
+              },
+              {
+                path: 'styles',
+                title: 'Style',
+              },
+              {
+                path: 'icon',
+                title: 'Icon',
+              },
+              {
+                path: 'image',
+                title: 'Image',
+              },
+              {
+                path: 'popup',
+                title: 'Popup',
+              },
+              {
+                path: 'toast',
+                title: 'Toast',
+              },
+            ],
+          },
+          {
+            title: 'Form Components',
+            items: [
+              {
+                path: 'calendar',
+                title: 'Calendar',
+              },
+              {
+                path: 'cascader',
+                title: 'Cascader',
+              },
+              {
+                path: 'checkbox',
+                title: 'Checkbox',
+              },
+              {
+                path: 'datetime-picker',
+                title: 'DatetimePicker',
+              },
+              {
+                path: 'field',
+                title: 'Field',
+              },
+              {
+                path: 'form',
+                title: 'Form',
+              },
+              {
+                path: 'number-keyboard',
+                title: 'NumberKeyboard',
+              },
+              {
+                path: 'password-input',
+                title: 'PasswordInput',
+              },
+              {
+                path: 'picker',
+                title: 'Picker',
+              },
+              {
+                path: 'radio',
+                title: 'Radio',
+              },
+              {
+                path: 'rate',
+                title: 'Rate',
+              },
+              {
+                path: 'slider',
+                title: 'Slider',
+              },
+              {
+                path: 'switch',
+                title: 'Switch',
+              },
+              {
+                path: 'uploader',
+                title: 'Uploader',
+              },
+            ],
+          },
+          {
+            title: 'Feedback Components',
+            items: [
+              {
+                path: 'action-sheet',
+                title: 'ActionSheet',
+              },
+              {
+                path: 'dialog',
+                title: 'Dialog',
+              },
+              {
+                path: 'dropdown-menu',
+                title: 'DropdownMenu',
+              },
+              {
+                path: 'floating-bubble',
+                title: 'FloatingBubble',
+              },
+              {
+                path: 'loading',
+                title: 'Loading',
+              },
+              {
+                path: 'notify',
+                title: 'Notify',
+              },
+              {
+                path: 'overlay',
+                title: 'Overlay',
+              },
+              {
+                path: 'pull-refresh',
+                title: 'PullRefresh',
+              },
+              {
+                path: 'share-sheet',
+                title: 'ShareSheet',
+              },
+              {
+                path: 'swipe-cell',
+                title: 'SwipeCell',
+              },
+            ],
+          },
+          {
+            title: 'Display Components',
+            items: [
+              {
+                path: 'badge',
+                title: 'Badge',
+              },
+              {
+                path: 'circle',
+                title: 'Circle',
+              },
+              {
+                path: 'collapse',
+                title: 'Collapse',
+              },
+              {
+                path: 'count-down',
+                title: 'CountDown',
+              },
+              {
+                path: 'divider',
+                title: 'Divider',
+              },
+              {
+                path: 'empty',
+                title: 'Empty',
+              },
+              {
+                path: 'image-preview',
+                title: 'ImagePreview',
+              },
+              {
+                path: 'lazyload',
+                title: 'Lazyload',
+              },
+              {
+                path: 'list',
+                title: 'List',
+              },
+              {
+                path: 'skeleton',
+                title: 'Skeleton',
+              },
+              {
+                path: 'steps',
+                title: 'Steps',
+              },
+              {
+                path: 'notice-bar',
+                title: 'NoticeBar',
+              },
+              {
+                path: 'popover',
+                title: 'Popover',
+              },
+              {
+                path: 'progress',
+                title: 'Progress',
+              },
+              {
+                path: 'rolling-text',
+                title: 'RollingText',
+              },
+              {
+                path: 'sticky',
+                title: 'Sticky',
+              },
+              {
+                path: 'swiper',
+                title: 'Swiper',
+              },
+              {
+                path: 'tag',
+                title: 'Tag',
+              },
+              {
+                path: 'text-ellipsis',
+                title: 'TextEllipsis',
+              },
+              {
+                path: 'watermark',
+                title: 'Watermark',
+              },
+            ],
+          },
+          {
+            title: 'Navigation Components',
+            items: [
+              {
+                path: 'action-bar',
+                title: 'ActionBar',
+              },
+              {
+                path: 'grid',
+                title: 'Grid',
+              },
+              {
+                path: 'nav-bar',
+                title: 'NavBar',
+              },
+              {
+                path: 'sidebar',
+                title: 'Sidebar',
+              },
+              {
+                path: 'tabs',
+                title: 'Tabs',
+              },
+              {
+                path: 'tabbar',
+                title: 'Tabbar',
+              },
+            ],
+          },
+          {
+            title: 'Business Components',
+            items: [],
+          },
+        ],
+      },
     },
   },
 };

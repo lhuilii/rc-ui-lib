@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { components } from 'site-mobile-demo';
 import { Toast, Button, Popup, Field, useSetState } from '../..';
 import Cascader from '..';
+import { useCascaderDemoI18n } from './locale';
 import './style.less';
 
 const options = [
@@ -129,6 +130,7 @@ const options = [
 
 export default (): React.ReactNode => {
   const { DemoBlock, DemoSection } = components;
+  const t = useCascaderDemoI18n();
   const [state, set] = useSetState({
     v1: false,
     t1: '',
@@ -151,7 +153,7 @@ export default (): React.ReactNode => {
   ]);
   const onChange = ({ value }) => {
     if (value === dynamicOpts[0].value) {
-      Toast.loading({ message: '加载中...', duration: 0 });
+      Toast.loading({ message: t.loading, duration: 0 });
       setTimeout(() => {
         Toast.clear();
         const newOpts = JSON.parse(JSON.stringify(dynamicOpts));
@@ -166,18 +168,18 @@ export default (): React.ReactNode => {
 
   return (
     <DemoSection className="demo-cascader">
-      <DemoBlock card title="基础用法">
+      <DemoBlock card title={t.demoTitleBasic}>
         <Field
           isLink
           value={state.t1}
           readonly
-          label="地区"
-          placeholder="请选择所在地区"
+          label={t.areaLabel}
+          placeholder={t.areaPlaceholder}
           onClick={() => set({ v1: true })}
         />
         <Popup visible={state.v1} round position="bottom" onClose={() => set({ v1: false })}>
           <Cascader
-            title="请选择所在地区"
+            title={t.selectAreaTitle}
             options={options}
             onClose={() => set({ v1: false })}
             onFinish={({ selectedOptions }) => {
@@ -186,19 +188,19 @@ export default (): React.ReactNode => {
           />
         </Popup>
       </DemoBlock>
-      <DemoBlock card title="自定义颜色">
+      <DemoBlock card title={t.demoTitleColor}>
         <Field
           isLink
           value={state.t2}
           readonly
-          label="地区"
-          placeholder="请选择所在地区"
+          label={t.areaLabel}
+          placeholder={t.areaPlaceholder}
           onClick={() => set({ v2: true })}
         />
         <Popup visible={state.v2} round position="bottom" onClose={() => set({ v2: false })}>
           <Cascader
             activeColor="#f44336"
-            title="请选择所在地区"
+            title={t.selectAreaTitle}
             options={options}
             onClose={() => set({ v2: false })}
             onFinish={({ selectedOptions }) => {
@@ -207,18 +209,18 @@ export default (): React.ReactNode => {
           />
         </Popup>
       </DemoBlock>
-      <DemoBlock card title="异步加载选项">
+      <DemoBlock card title={t.demoTitleAsync}>
         <Field
           isLink
           value={state.t4}
           readonly
-          label="地区"
-          placeholder="请选择所在地区"
+          label={t.areaLabel}
+          placeholder={t.areaPlaceholder}
           onClick={() => set({ v4: true })}
         />
         <Popup visible={state.v4} round position="bottom" onClose={() => set({ v4: false })}>
           <Cascader
-            title="请选择所在地区"
+            title={t.selectAreaTitle}
             options={dynamicOpts}
             onChange={onChange}
             onClose={() => set({ v4: false })}
@@ -229,13 +231,13 @@ export default (): React.ReactNode => {
         </Popup>
       </DemoBlock>
 
-      <DemoBlock card title="自定义字段名">
+      <DemoBlock card title={t.demoTitleCustomField}>
         <Field
           isLink
           value={state.t3}
           readonly
-          label="地区"
-          placeholder="请选择所在地区"
+          label={t.areaLabel}
+          placeholder={t.areaPlaceholder}
           onClick={() => set({ v3: true })}
         />
         <Popup visible={state.v3} round position="bottom" onClose={() => set({ v3: false })}>
@@ -245,7 +247,7 @@ export default (): React.ReactNode => {
               value: 'code',
               children: 'items',
             }}
-            title="请选择所在地区"
+            title={t.selectAreaTitle}
             options={[
               {
                 name: '浙江省',
@@ -265,14 +267,19 @@ export default (): React.ReactNode => {
           />
         </Popup>
       </DemoBlock>
-      <DemoBlock card title="受控组件">
+      <DemoBlock card title={t.demoTitleControlled}>
         <Field
           isLink
           value={state.t5}
           readonly
-          label="地区"
-          placeholder="请选择所在地区"
-          errorMessage={<div>当前值:{JSON.stringify(state.value5)}</div>}
+          label={t.areaLabel}
+          placeholder={t.areaPlaceholder}
+          errorMessage={
+            <div>
+              {t.currentValue}
+              {JSON.stringify(state.value5)}
+            </div>
+          }
           onClick={() => set({ v5: true })}
         />
 
@@ -287,11 +294,11 @@ export default (): React.ReactNode => {
             })
           }
         >
-          外部设置
+          {t.externalSet}
         </Button>
         <Popup visible={state.v5} round position="bottom" onClose={() => set({ v5: false })}>
           <Cascader
-            title="请选择所在地区"
+            title={t.selectAreaTitle}
             value={state.value5}
             options={options}
             onClose={() => set({ v5: false })}

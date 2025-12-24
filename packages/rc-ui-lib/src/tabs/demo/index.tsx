@@ -3,74 +3,76 @@ import React from 'react';
 import { components } from 'site-mobile-demo';
 import { Toast } from '../..';
 import Tabs from '..';
+import { useTabsDemoI18n } from './locale';
 import './style.less';
 
 export default (): React.ReactNode => {
   const { DemoBlock, DemoSection } = components;
+  const t = useTabsDemoI18n();
 
   return (
     <DemoSection>
-      <DemoBlock title="基础用法">
+      <DemoBlock title={t.demoTitleBasic}>
         <Tabs onClickTab={(tab) => console.log(tab)}>
           {[1, 2, 3, 4].map((item) => (
-            <Tabs.TabPane key={item} title={`标签${item}`}>
-              内容 {item}
+            <Tabs.TabPane key={item} title={t.tabLabel(item)}>
+              {t.tabContent(item)}
             </Tabs.TabPane>
           ))}
         </Tabs>
       </DemoBlock>
-      <DemoBlock title="通过名称匹配">
+      <DemoBlock title={t.demoTitleName}>
         <Tabs active="c" onClickTab={(tab) => console.log(tab)}>
           {['a', 'b', 'c'].map((item, index) => (
-            <Tabs.TabPane key={item} title={`标签${index + 1}`} name={item}>
-              内容 {index + 1}
+            <Tabs.TabPane key={item} title={t.tabLabel(index + 1)} name={item}>
+              {t.tabContent(index + 1)}
             </Tabs.TabPane>
           ))}
         </Tabs>
       </DemoBlock>
-      <DemoBlock title="标签栏滚动">
+      <DemoBlock title={t.demoTitleScroll}>
         <Tabs onClickTab={(tab) => console.log(tab)}>
           {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
-            <Tabs.TabPane key={item} title={`标签${item}`}>
-              内容 {item}
+            <Tabs.TabPane key={item} title={t.tabLabel(item)}>
+              {t.tabContent(item)}
             </Tabs.TabPane>
           ))}
         </Tabs>
       </DemoBlock>
-      <DemoBlock title="禁用标签">
+      <DemoBlock title={t.demoTitleDisabled}>
         <Tabs onClickTab={(tab) => console.log(tab)}>
-          <Tabs.TabPane title="标签1">内容1</Tabs.TabPane>
-          <Tabs.TabPane title="标签2" disabled>
-            内容2
+          <Tabs.TabPane title={t.tabLabel(1)}>{t.tabContent(1)}</Tabs.TabPane>
+          <Tabs.TabPane title={t.tabLabel(2)} disabled>
+            {t.tabContent(2)}
           </Tabs.TabPane>
-          <Tabs.TabPane title="标签3">内容3</Tabs.TabPane>
+          <Tabs.TabPane title={t.tabLabel(3)}>{t.tabContent(3)}</Tabs.TabPane>
         </Tabs>
       </DemoBlock>
-      <DemoBlock title="样式风格">
+      <DemoBlock title={t.demoTitleStyle}>
         <Tabs type="card" onClickTab={(tab) => console.log(tab)}>
           {[1, 2, 3].map((item) => (
-            <Tabs.TabPane key={item} title={`标签${item}`}>
-              内容 {item}
+            <Tabs.TabPane key={item} title={t.tabLabel(item)}>
+              {t.tabContent(item)}
             </Tabs.TabPane>
           ))}
         </Tabs>
       </DemoBlock>
-      <DemoBlock title="点击事件" onClickTab={(tab) => console.log(tab)}>
+      <DemoBlock title={t.demoTitleClick} onClickTab={(tab) => console.log(tab)}>
         <Tabs onClick={(name, title) => Toast(title)}>
-          <Tabs.TabPane title="标签1">内容1</Tabs.TabPane>
-          <Tabs.TabPane title="标签2">内容2</Tabs.TabPane>
+          <Tabs.TabPane title={t.tabLabel(1)}>{t.tabContent(1)}</Tabs.TabPane>
+          <Tabs.TabPane title={t.tabLabel(2)}>{t.tabContent(2)}</Tabs.TabPane>
         </Tabs>
       </DemoBlock>
-      <DemoBlock title="粘性布局">
+      <DemoBlock title={t.demoTitleSticky}>
         <Tabs active={2} sticky onClickTab={(tab) => console.log(tab)}>
           {[1, 2, 3, 4].map((item) => (
-            <Tabs.TabPane key={item} title={`标签${item}`}>
-              <div style={{ height: '50vh' }}>内容 {item}</div>
+            <Tabs.TabPane key={item} title={t.tabLabel(item)}>
+              <div style={{ height: '50vh' }}>{t.tabContent(item)}</div>
             </Tabs.TabPane>
           ))}
         </Tabs>
       </DemoBlock>
-      <DemoBlock title="滚动导航">
+      <DemoBlock title={t.demoTitleScrollspy}>
         <Tabs
           sticky
           scrollspy={{ autoFocusLast: true, reachBottomThreshold: 50 }}
@@ -78,8 +80,8 @@ export default (): React.ReactNode => {
           onClickTab={(tab) => console.log(tab)}
         >
           {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
-            <Tabs.TabPane key={item} title={`标签${item}`}>
-              <div style={{ height: '50vh' }}>内容 {item}</div>
+            <Tabs.TabPane key={item} title={t.tabLabel(item)}>
+              <div style={{ height: '50vh' }}>{t.tabContent(item)}</div>
             </Tabs.TabPane>
           ))}
         </Tabs>

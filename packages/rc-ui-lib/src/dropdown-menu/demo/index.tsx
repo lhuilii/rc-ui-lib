@@ -3,21 +3,8 @@ import { components } from 'site-mobile-demo';
 import { Cell, Switch, Button } from '../..';
 import Toast, { DropdownMenu } from '..';
 import { DropdownMenuInstance } from '../PropsType';
+import { useDropdownMenuDemoI18n } from './locale';
 import './style.less';
-
-const option1 = [
-  { text: '全部商品', value: 0 },
-  { text: '新款商品', value: 1, icon: 'location-o' },
-  {
-    text: '活动商品',
-    value: 2,
-  },
-];
-const option2 = [
-  { text: '默认排序', value: 'a' },
-  { text: '好评排序', value: 'b' },
-  { text: '销量排序', value: 'c' },
-];
 
 const scrollList = () => {
   const arr = new Array(30).fill(1);
@@ -30,6 +17,20 @@ const scrollList = () => {
 };
 
 export default (): React.ReactNode => {
+  const t = useDropdownMenuDemoI18n();
+  const option1 = [
+    { text: t.optionAll, value: 0 },
+    { text: t.optionNew, value: 1, icon: 'location-o' },
+    {
+      text: t.optionActivity,
+      value: 2,
+    },
+  ];
+  const option2 = [
+    { text: t.optionDefaultOrder, value: 'a' },
+    { text: t.optionHighRating, value: 'b' },
+    { text: t.optionSales, value: 'c' },
+  ];
   const [value, setValue] = useState<Record<string, string | number>>({});
   // const [menuValue, setMenuValue] = useState<Record<string, string | number>>({});
   const dropdownMenuRef = useRef<DropdownMenuInstance>(null);
@@ -43,7 +44,7 @@ export default (): React.ReactNode => {
 
   return (
     <DemoSection className="demo-badge">
-      <DemoBlock title="基础用法">
+      <DemoBlock title={t.demoTitleBasic}>
         <DropdownMenu
           onChange={(v) => {
             console.log(v as any);
@@ -51,26 +52,26 @@ export default (): React.ReactNode => {
         >
           <DropdownMenu.Item
             name="item1"
-            defaultValue={{ text: '全部商品', value: 0 }}
+            defaultValue={{ text: t.optionAll, value: 0 }}
             value={value}
             options={option1}
             onChange={(v) => setValue(v as any)}
           />
           <DropdownMenu.Item
             name="item2"
-            defaultValue={{ text: '默认排序', value: 'a' }}
+            defaultValue={{ text: t.optionDefaultOrder, value: 'a' }}
             value={value}
             options={option2}
             onChange={(v) => setValue(v as any)}
           />
         </DropdownMenu>
       </DemoBlock>
-      <DemoBlock title="自定义菜单内容">
+      <DemoBlock title={t.demoTitleCustomContent}>
         <DropdownMenu ref={dropdownMenuRef}>
           <DropdownMenu.Item name="item1" options={option1} />
-          <DropdownMenu.Item title="筛选" name="item2">
-            <Cell center title="包邮" rightIcon={<Switch size={24} />} />
-            <Cell center title="团购" rightIcon={<Switch size={24} />} />
+          <DropdownMenu.Item title={t.filterTitle} name="item2">
+            <Cell center title={t.freeShipping} rightIcon={<Switch size={24} />} />
+            <Cell center title={t.groupBuy} rightIcon={<Switch size={24} />} />
             <div
               style={{
                 height: '40px',
@@ -81,31 +82,31 @@ export default (): React.ReactNode => {
               }}
             >
               <Button type="danger" block round onClick={onConfirm}>
-                确定
+                {t.confirm}
               </Button>
             </div>
           </DropdownMenu.Item>
         </DropdownMenu>
       </DemoBlock>
-      <DemoBlock title="自定义选中颜色">
+      <DemoBlock title={t.demoTitleActiveColor}>
         <DropdownMenu activeColor="#1900ff" zIndex="3000">
           <DropdownMenu.Item name="item1" options={option1} teleport={document.body} />
           <DropdownMenu.Item name="item2" options={option2} />
         </DropdownMenu>
       </DemoBlock>
-      <DemoBlock title="向上展开">
+      <DemoBlock title={t.demoTitleDirection}>
         <DropdownMenu direction="up" activeColor="#1900ff">
           <DropdownMenu.Item name="item1" options={option1} />
           <DropdownMenu.Item name="item2" options={option2} />
         </DropdownMenu>
       </DemoBlock>
-      <DemoBlock title="禁用菜单">
+      <DemoBlock title={t.demoTitleDisabled}>
         <DropdownMenu>
           <DropdownMenu.Item disabled name="item1" options={option1} />
           <DropdownMenu.Item disabled name="item2" options={option2} />
         </DropdownMenu>
       </DemoBlock>
-      <DemoBlock title="滚动">
+      <DemoBlock title={t.demoTitleScroll}>
         <DropdownMenu direction="up">
           <DropdownMenu.Item name="item1" options={scrollList()} />
         </DropdownMenu>

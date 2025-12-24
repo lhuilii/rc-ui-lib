@@ -2,10 +2,12 @@ import React from 'react';
 import { components } from 'site-mobile-demo';
 import { Loading } from '../..';
 import Lazyload from '..';
+import { useLazyloadDemoI18n } from './locale';
 import './style.less';
 
 export default (): React.ReactNode => {
   const { DemoBlock, DemoSection } = components;
+  const t = useLazyloadDemoI18n();
   const images = [
     'https://img01.yzcdn.cn/vant/apple-1.jpg',
     'https://img01.yzcdn.cn/vant/apple-2.jpg',
@@ -30,24 +32,24 @@ export default (): React.ReactNode => {
 
   return (
     <DemoSection>
-      <DemoBlock title="基础用法">
+      <DemoBlock title={t.demoTitleBasic}>
         {images.map((image) => (
           <Lazyload.Image observer={false} key={image} image={image} />
         ))}
       </DemoBlock>
-      <DemoBlock title="背景图片懒加载">
+      <DemoBlock title={t.demoTitleBackground}>
         {backgroundImageList.map((image) => (
           <Lazyload.Image type="background" key={image} height="300px" image={image} />
         ))}
       </DemoBlock>
-      <DemoBlock title="懒加载模块">
+      <DemoBlock title={t.demoTitleModule}>
         {componentImageList.map((image) => (
           <Lazyload key={image} loading={<Spain />} height="250">
             <img alt="" src={image} width="100%" height="250" />
           </Lazyload>
         ))}
       </DemoBlock>
-      <DemoBlock title="事件监听懒加载模块">
+      <DemoBlock title={t.demoTitleObserverModule}>
         {componentImageList.map((image) => (
           <Lazyload observer={false} key={image} loading={<Spain />}>
             <img alt="" src={image} width="100%" height="300" />

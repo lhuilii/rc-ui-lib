@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { components } from 'site-mobile-demo';
 import Progress from '..';
 import { Button } from '../..';
+import { useProgressDemoI18n } from './locale';
 import './style.less';
 
 export default (): React.ReactNode => {
   const { DemoBlock, DemoSection } = components;
   const [value, setValue] = useState(50);
+  const t = useProgressDemoI18n();
 
   const format = (rate) => Math.min(Math.max(rate, 0), 100);
 
@@ -20,29 +22,29 @@ export default (): React.ReactNode => {
 
   return (
     <DemoSection className="demo-slider">
-      <DemoBlock title="基础用法">
+      <DemoBlock title={t.demoTitleBasic}>
         <Progress percentage={50} />
       </DemoBlock>
-      <DemoBlock title="线条粗细">
+      <DemoBlock title={t.demoTitleStrokeWidth}>
         <Progress percentage={50} strokeWidth="8" />
       </DemoBlock>
-      <DemoBlock title="置灰">
+      <DemoBlock title={t.demoTitleInactive}>
         <Progress inactive percentage={50} />
       </DemoBlock>
-      <DemoBlock title="样式定制">
-        <Progress pivotText="橙色" color="#f2826a" percentage={25} />
-        <Progress pivotText="红色" color="#ee0a24" percentage={50} />
+      <DemoBlock title={t.demoTitleCustomStyle}>
+        <Progress pivotText={t.pivotOrange} color="#f2826a" percentage={25} />
+        <Progress pivotText={t.pivotRed} color="#ee0a24" percentage={50} />
         <Progress
           percentage="75"
-          pivotText="紫色"
+          pivotText={t.pivotPurple}
           pivotColor="#7232dd"
           color="linear-gradient(to right, #be99ff, #7232dd)"
         />
       </DemoBlock>
-      <DemoBlock title="过渡效果">
+      <DemoBlock title={t.demoTitleTransition}>
         <Progress percentage={value} />
-        <Button type="primary" size="small" onClick={add} text="增加" />
-        <Button type="danger" size="small" onClick={reduce} text="减少" />
+        <Button type="primary" size="small" onClick={add} text={t.btnIncrease} />
+        <Button type="danger" size="small" onClick={reduce} text={t.btnDecrease} />
       </DemoBlock>
     </DemoSection>
   );

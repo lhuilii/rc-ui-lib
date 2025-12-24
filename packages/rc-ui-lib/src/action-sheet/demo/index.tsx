@@ -2,34 +2,40 @@ import React, { useState } from 'react';
 import { components } from 'site-mobile-demo';
 import { Cell } from '../..';
 import ActionSheet from '..';
+import { useActionSheetDemoI18n } from './locale';
 import './style.less';
-
-const actions = [{ name: '选项一' }, { name: '选项二' }, { name: '选项三' }];
-const actions1 = [{ name: '选项一' }, { name: '选项二' }, { name: '选项三', subname: '描述信息' }];
-const actions2 = [
-  { name: '选项一', color: '#ee0a24' },
-  { name: '选项二', disabled: true },
-  { loading: true },
-];
 
 export default (): React.ReactNode => {
   const { DemoBlock, DemoSection } = components;
+  const t = useActionSheetDemoI18n();
+  const actions = [{ name: t.option1 }, { name: t.option2 }, { name: t.option3 }];
+  const actions1 = [
+    { name: t.option1 },
+    { name: t.option2 },
+    { name: t.option3, subname: t.option3Subname },
+  ];
+  const actions2 = [
+    { name: t.option1, color: '#ee0a24' },
+    { name: t.option2, disabled: true },
+    { loading: true },
+  ];
+
   const [visible, setVisible] = useState(-1);
   const onCancel = () => setVisible(-1);
   return (
     <DemoSection>
-      <DemoBlock card title="基础用法">
-        <Cell title="基础用法" isLink onClick={() => setVisible(1)} />
-        <Cell title="展示取消按钮" isLink onClick={() => setVisible(2)} />
-        <Cell title="展示描述信息" isLink onClick={() => setVisible(3)} />
+      <DemoBlock card title={t.demoTitleBasic}>
+        <Cell title={t.basicUsage} isLink onClick={() => setVisible(1)} />
+        <Cell title={t.showCancelButton} isLink onClick={() => setVisible(2)} />
+        <Cell title={t.showDescription} isLink onClick={() => setVisible(3)} />
       </DemoBlock>
 
-      <DemoBlock card title="选项状态">
-        <Cell title="选项状态" isLink onClick={() => setVisible(4)} />
+      <DemoBlock card title={t.demoTitleStatus}>
+        <Cell title={t.optionStatus} isLink onClick={() => setVisible(4)} />
       </DemoBlock>
 
-      <DemoBlock card title="自定义面板">
-        <Cell title="自定义面板" isLink onClick={() => setVisible(5)} />
+      <DemoBlock card title={t.demoTitleCustomPanel}>
+        <Cell title={t.customPanel} isLink onClick={() => setVisible(5)} />
       </DemoBlock>
 
       <ActionSheet visible={visible === 1} onCancel={onCancel} actions={actions} />
@@ -37,28 +43,28 @@ export default (): React.ReactNode => {
         visible={visible === 2}
         onCancel={onCancel}
         actions={actions}
-        cancelText="取消"
+        cancelText={t.cancel}
       />
       <ActionSheet
         visible={visible === 3}
         onCancel={onCancel}
-        description="这是一段描述信息"
+        description={t.description}
         actions={actions1}
-        cancelText="取消"
+        cancelText={t.cancel}
       />
       <ActionSheet
         visible={visible === 4}
         onCancel={onCancel}
         actions={actions2}
-        cancelText="取消"
+        cancelText={t.cancel}
       />
       <ActionSheet
-        title="自定义内容"
+        title={t.customTitle}
         visible={visible === 5}
         onCancel={onCancel}
         cancelText={false}
       >
-        <div className="demo-action-sheet-content">内容</div>
+        <div className="demo-action-sheet-content">{t.customContent}</div>
       </ActionSheet>
     </DemoSection>
   );

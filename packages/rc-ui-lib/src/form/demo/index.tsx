@@ -3,10 +3,12 @@ import React from 'react';
 import { components } from 'site-mobile-demo';
 import { Field, Rate, Checkbox, Radio, Switch, Toast, Button, Uploader } from '../..';
 import Form from '..';
+import { useFormDemoI18n } from './locale';
 import './style.less';
 
 export default (): React.ReactNode => {
   const { DemoBlock, DemoSection } = components;
+  const t = useFormDemoI18n();
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
@@ -15,14 +17,14 @@ export default (): React.ReactNode => {
 
   return (
     <DemoSection>
-      <DemoBlock title="基础用法">
+      <DemoBlock title={t.demoTitleBasic}>
         <Form
           showValidateMessage={false}
           onFinish={onFinish}
           footer={
             <div style={{ margin: '16px 16px 0' }}>
               <Button round nativeType="submit" type="primary" block>
-                提交
+                {t.submit}
               </Button>
             </div>
           }
@@ -32,72 +34,72 @@ export default (): React.ReactNode => {
               message:
                 'A prime is a natural number greater than 1 that has no positive divisors other than 1 and itself.',
             }}
-            intro="确保这是唯一的用户名"
-            rules={[{ required: true, message: '请填写用户名' }]}
+            intro={t.introUsername}
+            rules={[{ required: true, message: t.ruleRequiredUsername }]}
             name="username"
-            label="用户名"
+            label={t.labelUsername}
           >
-            <Field placeholder="请输入用户名" />
+            <Field placeholder={t.placeholderUsername} />
           </Form.Item>
           <Form.Item
-            rules={[{ required: true, message: '请填写密码' }]}
+            rules={[{ required: true, message: t.ruleRequiredPassword }]}
             name="password"
-            label="密码"
+            label={t.labelPassword}
           >
-            <Field placeholder="请输入密码" />
+            <Field placeholder={t.placeholderPassword} />
           </Form.Item>
         </Form>
       </DemoBlock>
 
-      <DemoBlock title="校验规则-触发时机onSubmit">
+      <DemoBlock title={t.demoTitleValidateOnSubmit}>
         <Form
           onFinish={onFinish}
           validateTrigger="onSubmit"
           footer={
             <div style={{ margin: '16px 16px 0' }}>
               <Button round nativeType="submit" type="primary" block>
-                提交
+                {t.submit}
               </Button>
             </div>
           }
         >
           <Form.Item
             name="text1"
-            label="正则校验"
-            rules={[{ pattern: /\d{6}/, message: '请输入6位数字' }]}
+            label={t.labelPattern}
+            rules={[{ pattern: /\d{6}/, message: t.rulePattern6Digits }]}
           >
-            <Field placeholder="正则校验" />
+            <Field placeholder={t.placeholderPattern} />
           </Form.Item>
           <Form.Item
             name="text2"
-            label="函数校验"
+            label={t.labelFunction}
             rules={[
               {
                 validator: (_, value) => {
                   if (/1\d{10}/.test(value)) {
                     return Promise.resolve(true);
                   }
-                  return Promise.reject(new Error('请输入正确的手机号码'));
+                  return Promise.reject(new Error(t.rulePhone));
                 },
               },
             ]}
           >
-            <Field placeholder="函数校验" />
+            <Field placeholder={t.placeholderFunction} />
           </Form.Item>
           <Form.Item
-            label="异步函数校验"
+            label={t.labelAsyncFunction}
             name="text3"
             rules={[
               {
                 validator: (_, value) => {
                   return new Promise((resolve, reject) => {
-                    Toast.loading('验证中...');
+                    Toast.loading(t.validating);
 
                     setTimeout(() => {
                       if (/\d{6}/.test(value)) {
                         resolve(true);
                       } else {
-                        reject(new Error('请输入正确内容'));
+                        reject(new Error(t.ruleCorrectContent));
                       }
                       Toast.clear();
                     }, 1000);
@@ -106,58 +108,58 @@ export default (): React.ReactNode => {
               },
             ]}
           >
-            <Field placeholder="异步函数校验" />
+            <Field placeholder={t.placeholderAsyncFunction} />
           </Form.Item>
         </Form>
       </DemoBlock>
-      <DemoBlock title="校验规则-触发时机onChange">
+      <DemoBlock title={t.demoTitleValidateOnChange}>
         <Form
           onFinish={onFinish}
           footer={
             <div style={{ margin: '16px 16px 0' }}>
               <Button round nativeType="submit" type="primary" block>
-                提交
+                {t.submit}
               </Button>
             </div>
           }
         >
           <Form.Item
             name="text1"
-            label="正则校验2"
-            rules={[{ pattern: /\d{6}/, message: '请输入6位数字' }]}
+            label={t.labelPattern2}
+            rules={[{ pattern: /\d{6}/, message: t.rulePattern6Digits }]}
           >
-            <Field placeholder="正则校验" />
+            <Field placeholder={t.placeholderPattern} />
           </Form.Item>
           <Form.Item
             name="text2"
-            label="函数校验"
+            label={t.labelFunction}
             rules={[
               {
                 validator: (_, value) => {
                   if (/1\d{10}/.test(value)) {
                     return Promise.resolve(true);
                   }
-                  return Promise.reject(new Error('请输入正确的手机号码'));
+                  return Promise.reject(new Error(t.rulePhone));
                 },
               },
             ]}
           >
-            <Field placeholder="函数校验" />
+            <Field placeholder={t.placeholderFunction} />
           </Form.Item>
           <Form.Item
-            label="异步函数校验"
+            label={t.labelAsyncFunction}
             name="text3"
             rules={[
               {
                 validator: (_, value) => {
                   return new Promise((resolve, reject) => {
-                    Toast.loading('验证中...');
+                    Toast.loading(t.validating);
 
                     setTimeout(() => {
                       if (/\d{6}/.test(value)) {
                         resolve(true);
                       } else {
-                        reject(new Error('请输入正确内容'));
+                        reject(new Error(t.ruleCorrectContent));
                       }
                       Toast.clear();
                     }, 1000);
@@ -166,12 +168,12 @@ export default (): React.ReactNode => {
               },
             ]}
           >
-            <Field placeholder="异步函数校验" />
+            <Field placeholder={t.placeholderAsyncFunction} />
           </Form.Item>
         </Form>
       </DemoBlock>
 
-      <DemoBlock title="表单类型">
+      <DemoBlock title={t.demoTitleTypes}>
         <Form
           inset
           form={form}
@@ -179,51 +181,51 @@ export default (): React.ReactNode => {
           footer={
             <div style={{ margin: '16px 16px 0' }}>
               <Button round nativeType="submit" type="primary" block>
-                提交
+                {t.submit}
               </Button>
             </div>
           }
         >
-          <Form.Item name="switch" label="开关" valuePropName="checked">
+          <Form.Item name="switch" label={t.labelSwitch} valuePropName="checked">
             <Switch size={20} />
           </Form.Item>
-          <Form.Item name="checkbox" label="复选框" valuePropName="checked">
+          <Form.Item name="checkbox" label={t.labelCheckbox} valuePropName="checked">
             <Checkbox shape="square" />
           </Form.Item>
-          <Form.Item name="checkbox_group" label="复选框组">
+          <Form.Item name="checkbox_group" label={t.labelCheckboxGroup}>
             <Checkbox.Group direction="horizontal">
               <Checkbox shape="square" name="c1">
-                复选框1
+                {t.checkbox1}
               </Checkbox>
               <Checkbox shape="square" name="c2">
-                复选框2
+                {t.checkbox2}
               </Checkbox>
             </Checkbox.Group>
           </Form.Item>
-          <Form.Item name="radio" label="单选框" initialValue="r1">
+          <Form.Item name="radio" label={t.labelRadio} initialValue="r1">
             <Radio.Group direction="horizontal">
-              <Radio name="r1">单选框1</Radio>
-              <Radio name="r2">单选框2</Radio>
+              <Radio name="r1">{t.radio1}</Radio>
+              <Radio name="r2">{t.radio2}</Radio>
             </Radio.Group>
           </Form.Item>
-          <Form.Item name="rate" label="评分" initialValue={3}>
+          <Form.Item name="rate" label={t.labelRate} initialValue={3}>
             <Rate />
           </Form.Item>
           <Form.Item
             name="uploader"
-            label="上传文件"
-            rules={[{ required: true, message: '请选择文件' }]}
+            label={t.labelUploader}
+            rules={[{ required: true, message: t.ruleSelectFile }]}
             initialValue={[
               {
                 url: 'https://img.yzcdn.cn/vant/sand.jpg',
                 status: 'done',
-                name: '图片名称',
+                name: t.uploaderFileName,
               },
             ]}
           >
             <Uploader />
           </Form.Item>
-          <Form.Item name="textarea" label="详细地址">
+          <Form.Item name="textarea" label={t.labelTextarea}>
             <Field rows={3} autosize type="textarea" maxlength={140} showWordLimit />
           </Form.Item>
         </Form>

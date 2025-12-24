@@ -3,61 +3,63 @@ import React, { useState } from 'react';
 import { components } from 'site-mobile-demo';
 import { Cell, Icon, Flex } from '../..';
 import Notify from '..';
+import { useNotifyDemoI18n } from './locale';
 import './style.less';
 
 export default (): React.ReactNode => {
   const { DemoBlock, DemoSection } = components;
+  const t = useNotifyDemoI18n();
 
   const [visible, setVisible] = useState(false);
   return (
     <DemoSection className="demo-notify">
-      <DemoBlock card title="基础用法">
-        <Cell title="基础用法" isLink onClick={() => Notify.show('通知内容')} />
+      <DemoBlock card title={t.demoTitleBasic}>
+        <Cell title={t.cellBasic} isLink onClick={() => Notify.show(t.message)} />
       </DemoBlock>
-      <DemoBlock card title="通知类型">
+      <DemoBlock card title={t.demoTitleType}>
         <Cell
-          title="主要通知"
+          title={t.cellTypePrimary}
           isLink
-          onClick={() => Notify.show({ type: 'primary', message: '通知内容' })}
+          onClick={() => Notify.show({ type: 'primary', message: t.message })}
         />
         <Cell
-          title="成功通知"
+          title={t.cellTypeSuccess}
           isLink
-          onClick={() => Notify.show({ type: 'success', message: '通知内容' })}
+          onClick={() => Notify.show({ type: 'success', message: t.message })}
         />
         <Cell
-          title="危险通知"
+          title={t.cellTypeDanger}
           isLink
-          onClick={() => Notify.show({ type: 'danger', message: '通知内容' })}
+          onClick={() => Notify.show({ type: 'danger', message: t.message })}
         />
         <Cell
-          title="警告通知"
+          title={t.cellTypeWarning}
           isLink
-          onClick={() => Notify.show({ type: 'warning', message: '通知内容' })}
+          onClick={() => Notify.show({ type: 'warning', message: t.message })}
         />
       </DemoBlock>
-      <DemoBlock card title="自定义配置">
+      <DemoBlock card title={t.demoTitleCustom}>
         <Cell
-          title="自定义颜色"
+          title={t.cellCustomColor}
           isLink
           onClick={() =>
-            Notify.show({ message: '自定义颜色', color: '#ad0000', background: '#ffe1e1' })
+            Notify.show({ message: t.customColor, color: '#ad0000', background: '#ffe1e1' })
           }
         />
         <Cell
-          title="自定义时长"
+          title={t.cellCustomDuration}
           isLink
-          onClick={() => Notify.show({ message: '自定义时长', duration: 1000 })}
+          onClick={() => Notify.show({ message: t.customDuration, duration: 1000 })}
         />
       </DemoBlock>
-      <DemoBlock card title="组件调用">
-        <Cell title="组件调用" isLink onClick={() => setVisible(true)} />
+      <DemoBlock card title={t.demoTitleComponent}>
+        <Cell title={t.cellComponent} isLink onClick={() => setVisible(true)} />
         <Notify visible={visible} type="success">
           <Flex style={{ width: '100%' }} align="center" justify="between">
             <div />
             <div>
               <Icon name="bell" style={{ marginRight: 4 }} />
-              <span>通知内容</span>
+              <span>{t.message}</span>
             </div>
             <Icon name="close" onClick={() => setVisible(false)} />
           </Flex>

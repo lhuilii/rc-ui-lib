@@ -4,6 +4,7 @@ import { components } from 'site-mobile-demo';
 import { Button, Cell, Toast } from '../..';
 import { CheckboxGroupInstance } from '../PropsType';
 import { Checkbox } from '..';
+import { useCheckboxDemoI18n } from './locale';
 import './style.less';
 
 const activeIcon = 'https://img.yzcdn.cn/vant/user-active.png';
@@ -11,6 +12,7 @@ const inactiveIcon = 'https://img.yzcdn.cn/vant/user-inactive.png';
 
 export default (): React.ReactNode => {
   const { DemoBlock, DemoSection } = components;
+  const t = useCheckboxDemoI18n();
 
   const ref = useRef<CheckboxGroupInstance>(null);
   const [checkAll, setCheckAll] = useState(['a']);
@@ -27,48 +29,48 @@ export default (): React.ReactNode => {
 
   return (
     <DemoSection>
-      <DemoBlock title="基础用法">
+      <DemoBlock title={t.demoTitleBasic}>
         <Checkbox checked={checked} onChange={setChecked}>
-          复选框
+          {t.checkbox}
         </Checkbox>
       </DemoBlock>
-      <DemoBlock title="禁用状态">
+      <DemoBlock title={t.demoTitleDisabled}>
         <Checkbox defaultChecked disabled>
-          复选框
+          {t.checkbox}
         </Checkbox>
-        <Checkbox disabled>复选框</Checkbox>
+        <Checkbox disabled>{t.checkbox}</Checkbox>
       </DemoBlock>
-      <DemoBlock title="自定义形状">
+      <DemoBlock title={t.demoTitleShape}>
         <Checkbox defaultChecked shape="square">
-          自定义形状
+          {t.checkboxShape}
         </Checkbox>
       </DemoBlock>
-      <DemoBlock title="自定义颜色">
+      <DemoBlock title={t.demoTitleColor}>
         <Checkbox defaultChecked checkedColor="#ee0a24">
-          自定义颜色
+          {t.checkboxColor}
         </Checkbox>
       </DemoBlock>
-      <DemoBlock title="自定义大小">
+      <DemoBlock title={t.demoTitleSize}>
         <Checkbox defaultChecked iconSize="24px">
-          自定义大小
+          {t.checkboxSize}
         </Checkbox>
       </DemoBlock>
-      <DemoBlock title="自定义图标">
+      <DemoBlock title={t.demoTitleIcon}>
         <Checkbox
           defaultChecked
           iconRender={({ checked: isActive }) => (
             <img alt="" src={isActive ? activeIcon : inactiveIcon} />
           )}
         >
-          自定义图标
+          {t.checkboxIcon}
         </Checkbox>
       </DemoBlock>
-      <DemoBlock title="禁止文本点击">
+      <DemoBlock title={t.demoTitleLabelDisabled}>
         <Checkbox defaultChecked labelDisabled>
-          复选框
+          {t.checkbox}
         </Checkbox>
       </DemoBlock>
-      <DemoBlock title="动态更新">
+      <DemoBlock title={t.demoTitleDynamic}>
         <Checkbox
           checked={value}
           onChange={(val) => {
@@ -80,58 +82,58 @@ export default (): React.ReactNode => {
             }, 500);
           }}
         >
-          复选框
+          {t.checkbox}
         </Checkbox>
       </DemoBlock>
 
-      <DemoBlock title="复选框组">
+      <DemoBlock title={t.demoTitleGroup}>
         <Checkbox.Group onChange={(v) => console.log(v)} defaultValue={['a', 'b']}>
-          <Checkbox name="a">复选框a</Checkbox>
-          <Checkbox name="b">复选框b</Checkbox>
-          <Checkbox name="c">复选框c</Checkbox>
+          <Checkbox name="a">{t.checkboxA}</Checkbox>
+          <Checkbox name="b">{t.checkboxB}</Checkbox>
+          <Checkbox name="c">{t.checkboxC}</Checkbox>
         </Checkbox.Group>
       </DemoBlock>
-      <DemoBlock title="水平排列">
+      <DemoBlock title={t.demoTitleHorizontal}>
         <Checkbox.Group defaultValue={[]} direction="horizontal">
-          <Checkbox name="a">复选框a</Checkbox>
-          <Checkbox name="b">复选框b</Checkbox>
+          <Checkbox name="a">{t.checkboxA}</Checkbox>
+          <Checkbox name="b">{t.checkboxB}</Checkbox>
         </Checkbox.Group>
       </DemoBlock>
-      <DemoBlock title="限制最大可选数">
+      <DemoBlock title={t.demoTitleMax}>
         <Checkbox.Group defaultValue={[]} max={2}>
-          <Checkbox name="a">复选框a</Checkbox>
-          <Checkbox name="b">复选框b</Checkbox>
-          <Checkbox name="c">复选框c</Checkbox>
+          <Checkbox name="a">{t.checkboxA}</Checkbox>
+          <Checkbox name="b">{t.checkboxB}</Checkbox>
+          <Checkbox name="c">{t.checkboxC}</Checkbox>
         </Checkbox.Group>
       </DemoBlock>
-      <DemoBlock title="全选与反选">
+      <DemoBlock title={t.demoTitleCheckAll}>
         <Checkbox.Group ref={ref} value={checkAll} onChange={setCheckAll}>
-          <Checkbox name="a">复选框a</Checkbox>
-          <Checkbox name="b">复选框b</Checkbox>
-          <Checkbox name="c">复选框c</Checkbox>
+          <Checkbox name="a">{t.checkboxA}</Checkbox>
+          <Checkbox name="b">{t.checkboxB}</Checkbox>
+          <Checkbox name="c">{t.checkboxC}</Checkbox>
         </Checkbox.Group>
         <div className="demo-checkbox-buttons">
           <Button type="primary" onClick={() => ref.current?.toggleAll(true)}>
-            全选
+            {t.selectAll}
           </Button>
           <Button type="primary" onClick={() => ref.current?.toggleAll()}>
-            反选
+            {t.reverseSelect}
           </Button>
         </div>
       </DemoBlock>
-      <DemoBlock title="搭配单元格组件使用">
+      <DemoBlock title={t.demoTitleWithCell}>
         <Checkbox.Group value={cellCheck} onChange={setCellCheck}>
           <Cell.Group>
             <Cell
               clickable
-              title="单选框1"
+              title={t.radio1}
               icon="shop-o"
               onClick={() => toggle('a')}
               rightIcon={<Checkbox name="a" />}
             />
             <Cell
               clickable
-              title="单选框2"
+              title={t.radio2}
               icon="shop-o"
               onClick={() => toggle('b')}
               rightIcon={<Checkbox name="b" />}

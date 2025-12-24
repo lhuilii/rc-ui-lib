@@ -1,24 +1,26 @@
 import React, { useState } from 'react';
 import { components } from 'site-mobile-demo';
 import { Button, Overlay } from '../..';
+import { useOverlayDemoI18n } from './locale';
 import './style.less';
 
 export default (): React.ReactNode => {
   const { DemoBlock, DemoSection } = components;
+  const t = useOverlayDemoI18n();
   const [show, setShow] = useState<boolean>(false);
   const [showEmbedded, setShowEmbedded] = useState<boolean>(false);
 
   return (
     <DemoSection>
-      <DemoBlock title="显示遮罩层">
+      <DemoBlock title={t.demoTitleBasic}>
         <Button type="primary" onClick={() => setShow(true)}>
-          显示遮罩层
+          {t.buttonShowOverlay}
         </Button>
         <Overlay visible={show} onClick={() => setShow(false)} />
       </DemoBlock>
-      <DemoBlock title="嵌入内容">
+      <DemoBlock title={t.demoTitleEmbedded}>
         <Button type="primary" onClick={() => setShowEmbedded(true)}>
-          嵌入内容
+          {t.buttonEmbedded}
         </Button>
         <Overlay visible={showEmbedded} onClick={() => setShowEmbedded(false)}>
           <div className="wrapper">

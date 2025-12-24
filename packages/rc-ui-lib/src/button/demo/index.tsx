@@ -1,108 +1,112 @@
 import React from 'react';
 import { components } from 'site-mobile-demo';
 import { Button } from '..';
+import { useButtonDemoI18n } from './locale';
 import './style.less';
 
 export default (): React.ReactNode => {
   const { DemoBlock, DemoSection } = components;
+  const t = useButtonDemoI18n();
   return (
     <DemoSection>
-      <DemoBlock title="基础用法">
+      <DemoBlock title={t.demoTitleBasic}>
         <div className="demo-button-row">
-          <Button type="primary">主要按钮</Button>
-          <Button type="info">信息按钮</Button>
-          <Button type="default">默认按钮</Button>
+          <Button type="primary">{t.primary}</Button>
+          <Button type="info">{t.info}</Button>
+          <Button type="default">{t.default}</Button>
         </div>
-        <Button type="warning">警告按钮</Button>
-        <Button type="danger">危险按钮</Button>
+        <Button type="warning">{t.warning}</Button>
+        <Button type="danger">{t.danger}</Button>
       </DemoBlock>
-      <DemoBlock title="朴素按钮">
+      <DemoBlock title={t.demoTitlePlain}>
         <Button plain type="primary">
-          朴素按钮
+          {t.plainButton}
         </Button>
         <Button plain type="info">
-          朴素按钮
+          {t.plainButton}
         </Button>
       </DemoBlock>
-      <DemoBlock title="细边框按钮">
+      <DemoBlock title={t.demoTitleHairline}>
         <Button plain hairline type="primary">
-          细边框按钮
+          {t.hairlineButton}
         </Button>
         <Button plain hairline type="info">
-          细边框按钮
+          {t.hairlineButton}
         </Button>
       </DemoBlock>
-      <DemoBlock title="禁用状态">
+      <DemoBlock title={t.demoTitleDisabled}>
         <Button disabled type="primary">
-          禁用状态
+          {t.disabled}
         </Button>
         <Button disabled type="info">
-          禁用状态
+          {t.disabled}
         </Button>
       </DemoBlock>
-      <DemoBlock title="加载状态">
+      <DemoBlock title={t.demoTitleLoading}>
         <Button loading type="primary" />
         <Button loading type="primary" loadingType="spinner" />
-        <Button loading loadingText="加载中..." type="info" />
+        <Button loading loadingText={t.loadingText} type="info" />
       </DemoBlock>
-      <DemoBlock title="按钮形状">
+      <DemoBlock title={t.demoTitleShape}>
         <Button square type="primary">
-          方形按钮
+          {t.squareButton}
         </Button>
         <Button round type="info">
-          圆形按钮
+          {t.roundButton}
         </Button>
       </DemoBlock>
-      <DemoBlock title="图标按钮">
+      <DemoBlock title={t.demoTitleIcon}>
         <Button icon="plus" type="primary" />
         <Button icon="plus" iconPosition="left" type="primary">
-          按钮
+          {t.button}
         </Button>
         <Button icon="https://img.yzcdn.cn/vant/user-active.png" plain type="primary">
-          按钮
+          {t.button}
         </Button>
       </DemoBlock>
-      <DemoBlock title="按钮尺寸">
+      <DemoBlock title={t.demoTitleSize}>
         <Button type="primary" size="large">
-          大号按钮
+          {t.sizeLarge}
         </Button>
         <Button type="primary" size="normal">
-          普通按钮
+          {t.sizeNormal}
         </Button>
         <Button type="primary" size="small">
-          小型按钮
+          {t.sizeSmall}
         </Button>
         <Button type="primary" size="mini">
-          迷你按钮
+          {t.sizeMini}
         </Button>
       </DemoBlock>
-      <DemoBlock title="块级元素">
+      <DemoBlock title={t.demoTitleBlock}>
         <Button type="primary" block round>
-          块级元素
+          {t.block}
         </Button>
       </DemoBlock>
-      <DemoBlock title="阴影">
+      <DemoBlock title={t.demoTitleShadow}>
         <Button type="primary" block shadow>
-          阴影按钮
+          {t.shadowButton}
         </Button>
       </DemoBlock>
-      <DemoBlock title="自定义颜色">
-        <Button color="#7232dd">单色按钮</Button>
+      <DemoBlock title={t.demoTitleColor}>
+        <Button color="#7232dd">{t.solidColorButton}</Button>
         <Button color="#7232dd" plain>
-          单色按钮
+          {t.solidColorButton}
         </Button>
-        <Button color="linear-gradient(to right, #ff6034, #ee0a24)">渐变色按钮</Button>
+        <Button color="linear-gradient(to right, #ff6034, #ee0a24)">
+          {t.gradientButton}
+        </Button>
       </DemoBlock>
-      <DemoBlock title="按钮组">
+      <DemoBlock title={t.demoTitleGroup}>
         <Button.Group>
           <Button icon="arrow-left" block>
-            上一步
+            {t.prev}
           </Button>
           <Button icon="replay" block>
-            刷新
+            {t.refresh}
           </Button>
           <Button icon="arrow" block>
-            下一步
+            {t.next}
           </Button>
         </Button.Group>
       </DemoBlock>

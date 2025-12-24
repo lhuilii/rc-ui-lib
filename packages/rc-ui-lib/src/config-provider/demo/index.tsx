@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { components } from 'site-mobile-demo';
 import { Button, Rate, Field, Slider } from '../..';
 import ConfigProvider from '..';
+import { useConfigProviderDemoI18n } from './locale';
 import './style.less';
 import './font.less';
 
@@ -17,46 +18,47 @@ const themeVars = {
 
 export default (): React.ReactNode => {
   const { DemoBlock, DemoSection } = components;
+  const t = useConfigProviderDemoI18n();
   const [rate, updateRate] = useState(4);
   const [slider, updateSlider] = useState(50);
   return (
     <DemoSection className="demo-config-prodiver">
-      <DemoBlock title="默认主题">
-        <Field label="评分">
+      <DemoBlock title={t.demoTitleDefault}>
+        <Field label={t.fieldRate}>
           <Rate value={rate} onChange={updateRate} />
         </Field>
-        <Field label="滑块">
+        <Field label={t.fieldSlider}>
           <Slider value={slider} onChange={updateSlider} />
         </Field>
         <div style={{ margin: 16 }}>
           <Button block round type="primary">
-            提交
+            {t.submit}
           </Button>
         </div>
       </DemoBlock>
-      <DemoBlock title="定制主题">
+      <DemoBlock title={t.demoTitleCustomTheme}>
         <ConfigProvider themeVars={themeVars}>
-          <Field label="评分">
+          <Field label={t.fieldRate}>
             <Rate value={rate} onChange={updateRate} />
           </Field>
-          <Field label="滑块">
+          <Field label={t.fieldSlider}>
             <Slider value={slider} onChange={updateSlider} />
           </Field>
           <div style={{ margin: 16 }}>
             <Button block round type="primary">
-              提交
+              {t.submit}
             </Button>
           </div>
         </ConfigProvider>
       </DemoBlock>
-      <DemoBlock title="Icon替换">
+      <DemoBlock title={t.demoTitleIcon}>
         <ConfigProvider iconPrefix="iconfont">
-          <Field label="评分">
+          <Field label={t.fieldRate}>
             <Rate icon="emojifill" voidIcon="emojilight" />
           </Field>
           <div style={{ margin: 16 }}>
             <Button icon="1111" block round type="primary">
-              提交
+              {t.submit}
             </Button>
           </div>
         </ConfigProvider>

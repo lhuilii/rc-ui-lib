@@ -3,6 +3,7 @@ import { components } from 'site-mobile-demo';
 import PasswordInput from '..';
 import Button from '../../button';
 import { NumberKeyboard } from '../..';
+import { usePasswordInputDemoI18n } from './locale';
 import './style.less';
 
 import type { PasswordInputInstance } from '..';
@@ -19,6 +20,7 @@ const initialValue = {
 
 export default (): React.ReactNode => {
   const { DemoSection, DemoBlock } = components;
+  const t = usePasswordInputDemoI18n();
 
   const [values, setValues] = useState(initialValue);
   const [current, setCurrent] = useState(null);
@@ -66,12 +68,12 @@ export default (): React.ReactNode => {
   };
 
   const handleFill = () => {
-    setErrorInfo('密码错误');
+    setErrorInfo(t.errorInfo);
   };
 
   return (
     <DemoSection>
-      <DemoBlock ref={basicUsageRef} card title="基础用法">
+      <DemoBlock ref={basicUsageRef} card title={t.demoTitleBasic}>
         <PasswordInput
           value={values.basicUsage}
           focused={current === 'basicUsage'}
@@ -81,7 +83,7 @@ export default (): React.ReactNode => {
           keyboard={<NumberKeyboard />}
         />
       </DemoBlock>
-      <DemoBlock ref={nativeInputRef} card title="原生键盘用法">
+      <DemoBlock ref={nativeInputRef} card title={t.demoTitleNative}>
         <PasswordInput
           value={values.nativeInput}
           focused={current === 'nativeInput'}
@@ -90,7 +92,7 @@ export default (): React.ReactNode => {
           onChange={(value) => handleChange(value, 'nativeInput')}
         />
       </DemoBlock>
-      <DemoBlock ref={customLengthRef} card title="自定义长度">
+      <DemoBlock ref={customLengthRef} card title={t.demoTitleLength}>
         <PasswordInput
           value={values.customLength}
           length={4}
@@ -101,7 +103,7 @@ export default (): React.ReactNode => {
           keyboard={<NumberKeyboard />}
         />
       </DemoBlock>
-      <DemoBlock ref={addGutterRef} card title="格子间距">
+      <DemoBlock ref={addGutterRef} card title={t.demoTitleGutter}>
         <PasswordInput
           value={values.addGutter}
           gutter={10}
@@ -112,7 +114,7 @@ export default (): React.ReactNode => {
           keyboard={<NumberKeyboard />}
         />
       </DemoBlock>
-      <DemoBlock ref={removeMaskRef} card title="明文展示">
+      <DemoBlock ref={removeMaskRef} card title={t.demoTitlePlain}>
         <PasswordInput
           value={values.removeMask}
           mask={false}
@@ -122,10 +124,10 @@ export default (): React.ReactNode => {
           keyboard={<NumberKeyboard />}
         />
       </DemoBlock>
-      <DemoBlock ref={showInfoRef} card title="提示信息">
+      <DemoBlock ref={showInfoRef} card title={t.demoTitleInfo}>
         <PasswordInput
           value={values.showInfo}
-          info="密码为 6 位数字"
+          info={t.infoText}
           errorInfo={errorInfo}
           onFill={handleFill}
           focused={current === 'showInfo'}
@@ -135,7 +137,7 @@ export default (): React.ReactNode => {
           keyboard={<NumberKeyboard />}
         />
       </DemoBlock>
-      <DemoBlock ref={setValueRef} card title="手动清空密码">
+      <DemoBlock ref={setValueRef} card title={t.demoTitleSetValue}>
         <Button
           type="primary"
           onClick={() => {
@@ -145,7 +147,7 @@ export default (): React.ReactNode => {
             margin: 'var(--rc-password-input-margin) var(--rc-padding-md)',
           }}
         >
-          清空密码
+          {t.clearButton}
         </Button>
         <PasswordInput
           ref={psdRef}

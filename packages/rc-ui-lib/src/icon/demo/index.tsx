@@ -2,6 +2,7 @@ import React from 'react';
 import icons from '@vant/icons';
 import { components } from 'site-mobile-demo';
 import { Flex, Icon, Tabs, Toast } from '../..';
+import { useIconDemoI18n } from './locale';
 import './style.less';
 
 const IconFont = Icon.createFromIconfontCN('//at.alicdn.com/t/font_2763890_w471tfudy4d.js');
@@ -35,6 +36,7 @@ function copyToClipboard(str: string) {
 
 export default (): React.ReactNode => {
   const { DemoBlock, DemoSection } = components;
+  const t = useIconDemoI18n();
   const copy = (icon: string, option: Record<string, unknown> = {}) => {
     let tag = `<Icon name="${icon}"`;
     if ('dot' in option) {
@@ -55,15 +57,15 @@ export default (): React.ReactNode => {
     Toast({
       duration: 1500,
       className: 'demo-icon-notify',
-      message: `复制成功：${tag}`,
+      message: `${t.copySuccess}${tag}`,
     });
   };
 
   return (
     <DemoSection>
       <Tabs active={0} sticky>
-        <Tabs.TabPane title="用法示例">
-          <DemoBlock title="基础用法">
+        <Tabs.TabPane title={t.tabUsage}>
+          <DemoBlock title={t.demoTitleBasic}>
             <Flex>
               <Flex.Item span={6}>
                 <Icon color="red" name="chat-o" />
@@ -73,7 +75,7 @@ export default (): React.ReactNode => {
               </Flex.Item>
             </Flex>
           </DemoBlock>
-          <DemoBlock title="徽标提示">
+          <DemoBlock title={t.demoTitleBadge}>
             <Flex>
               <Flex.Item span={6}>
                 <Icon name="chat-o" dot />
@@ -86,7 +88,7 @@ export default (): React.ReactNode => {
               </Flex.Item>
             </Flex>
           </DemoBlock>
-          <DemoBlock title="图标颜色">
+          <DemoBlock title={t.demoTitleColor}>
             <Flex>
               <Flex.Item span={6}>
                 <Icon name="cart-o" color="#f44336" />
@@ -96,7 +98,7 @@ export default (): React.ReactNode => {
               </Flex.Item>
             </Flex>
           </DemoBlock>
-          <DemoBlock title="图标大小">
+          <DemoBlock title={t.demoTitleSize}>
             <Flex>
               <Flex.Item span={6}>
                 <Icon name="close" size="40" />
@@ -106,7 +108,7 @@ export default (): React.ReactNode => {
               </Flex.Item>
             </Flex>
           </DemoBlock>
-          <DemoBlock title="自定义图标">
+          <DemoBlock title={t.demoTitleCustom}>
             <Flex>
               <Flex.Item span={6}>
                 <IconFont name="cuIcon-classify" color="#f44336" />
@@ -117,7 +119,7 @@ export default (): React.ReactNode => {
             </Flex>
           </DemoBlock>
         </Tabs.TabPane>
-        <Tabs.TabPane title="基础图标">
+        <Tabs.TabPane title={t.tabBasic}>
           <Flex wrap="wrap">
             {icons.basic.map((icon) => (
               <Flex.Item onClick={() => copy(icon)} key={icon} span={6}>
@@ -127,7 +129,7 @@ export default (): React.ReactNode => {
             ))}
           </Flex>
         </Tabs.TabPane>
-        <Tabs.TabPane title="线框风格">
+        <Tabs.TabPane title={t.tabOutline}>
           <Flex wrap="wrap">
             {icons.outline.map((icon) => (
               <Flex.Item onClick={() => copy(icon)} key={icon} span={6}>
@@ -137,7 +139,7 @@ export default (): React.ReactNode => {
             ))}
           </Flex>
         </Tabs.TabPane>
-        <Tabs.TabPane title="实底风格">
+        <Tabs.TabPane title={t.tabFilled}>
           <Flex wrap="wrap">
             {icons.filled.map((icon) => (
               <Flex.Item onClick={() => copy(icon)} key={icon} span={6}>

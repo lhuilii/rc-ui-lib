@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { components } from 'site-mobile-demo';
 import Rate from '..';
+import { useRateDemoI18n } from './locale';
 import './style.less';
 
 export default (): React.ReactNode => {
@@ -10,15 +11,16 @@ export default (): React.ReactNode => {
     setValue(v);
   };
   const { DemoBlock, DemoSection } = components;
+  const t = useRateDemoI18n();
   return (
     <DemoSection className="demo-rat">
-      <DemoBlock title="基础用法">
+      <DemoBlock title={t.demoTitleBasic}>
         <Rate value={value} onChange={onChange} />
       </DemoBlock>
-      <DemoBlock title="自定义图标">
+      <DemoBlock title={t.demoTitleCustomIcon}>
         <Rate icon="fire" voidIcon="fire-o" value={value} onChange={onChange} />
       </DemoBlock>
-      <DemoBlock title="自定义样式">
+      <DemoBlock title={t.demoTitleCustomStyle}>
         <Rate
           icon="fire"
           voidIcon="fire-o"
@@ -28,7 +30,7 @@ export default (): React.ReactNode => {
           onChange={onChange}
         />
       </DemoBlock>
-      <DemoBlock title="半星样式">
+      <DemoBlock title={t.demoTitleHalf}>
         <Rate
           allowHalf
           value={value1}
@@ -37,13 +39,13 @@ export default (): React.ReactNode => {
           }}
         />
       </DemoBlock>
-      <DemoBlock title="自定义数量">
+      <DemoBlock title={t.demoTitleCount}>
         <Rate allowHalf value={value} count={8} onChange={onChange} />
       </DemoBlock>
-      <DemoBlock title="禁用状态">
+      <DemoBlock title={t.demoTitleDisabled}>
         <Rate allowHalf value={value} disabled onChange={onChange} />
       </DemoBlock>
-      <DemoBlock title="只读状态显示小数">
+      <DemoBlock title={t.demoTitleReadonlyDecimal}>
         <Rate allowHalf defaultValue={3.6} readonly onChange={onChange} />
       </DemoBlock>
     </DemoSection>

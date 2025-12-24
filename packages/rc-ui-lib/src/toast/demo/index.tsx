@@ -3,95 +3,97 @@ import React from 'react';
 import { components } from 'site-mobile-demo';
 import { Cell } from '../../cell';
 import Toast from '..';
+import { useToastDemoI18n } from './locale';
 
 export default (): React.ReactNode => {
   const { DemoBlock, DemoSection } = components;
+  const t = useToastDemoI18n();
 
   const onDynicUpdate = () => {
     let remain = 4;
     let timer;
     const update = Toast({
-      message: `还剩 ${remain + 1} 秒`,
+      message: t.toastRemain(remain + 1),
       duration: 5000,
       onClose: () => clearInterval(timer),
     });
     timer = setInterval(() => {
-      update.config({ message: `还剩 ${remain--} 秒` });
+      update.config({ message: t.toastRemain(remain--) });
     }, 1000);
   };
 
   return (
     <DemoSection>
-      <DemoBlock card title="基础用法">
-        <Cell title="文字提示" isLink onClick={() => Toast.info('提示内容')} />
+      <DemoBlock card title={t.demoTitleBasic}>
+        <Cell title={t.cellText} isLink onClick={() => Toast.info(t.toastInfo)} />
         <Cell
-          title="加载提示"
+          title={t.cellLoading}
           isLink
           onClick={() => {
             Toast.loading({
-              message: '加载中...',
+              message: t.toastLoading,
               forbidClick: false,
               duration: 2000,
             });
           }}
         />
-        <Cell title="成功提示" isLink onClick={() => Toast.success('成功文案')} />
-        <Cell title="失败提示" isLink onClick={() => Toast.fail('失败文案')} />
+        <Cell title={t.cellSuccess} isLink onClick={() => Toast.success(t.toastSuccess)} />
+        <Cell title={t.cellFail} isLink onClick={() => Toast.fail(t.toastFail)} />
       </DemoBlock>
-      <DemoBlock card title="动态更新提示">
-        <Cell title="动态更新提示" isLink onClick={onDynicUpdate} />
+      <DemoBlock card title={t.demoTitleDynamic}>
+        <Cell title={t.cellDynamic} isLink onClick={onDynicUpdate} />
       </DemoBlock>
-      <DemoBlock card title="自定义图标">
+      <DemoBlock card title={t.demoTitleCustomIcon}>
         <Cell
-          title="自定义图标"
+          title={t.cellCustomIcon}
           isLink
           onClick={() =>
             Toast({
-              message: '自定义图标',
+              message: t.toastCustomIcon,
               icon: 'fire-o',
             })
           }
         />
 
         <Cell
-          title="自定义图片"
+          title={t.cellCustomImage}
           isLink
           onClick={() =>
             Toast({
-              message: '自定义图片',
+              message: t.toastCustomImage,
               icon: 'https://rancui.github.io/rc-ui-lib/rc-ui-lib.png',
             })
           }
         />
         <Cell
-          title="自定义加载图标"
+          title={t.cellCustomLoading}
           isLink
           onClick={() =>
             Toast.loading({
-              message: '加载中...',
+              message: t.toastLoading,
               forbidClick: true,
               loadingType: 'spinner',
             })
           }
         />
       </DemoBlock>
-      <DemoBlock card title="自定义位置">
+      <DemoBlock card title={t.demoTitleCustomPosition}>
         <Cell
-          title="顶部展示"
+          title={t.cellTop}
           isLink
           onClick={() =>
             Toast({
-              message: '顶部展示',
+              message: t.toastTop,
               position: 'top',
             })
           }
         />
         <Cell
-          title="底部展示"
+          title={t.cellBottom}
           isLink
           onClick={() =>
             Toast({
-              message: '底部展示',
+              message: t.toastBottom,
               position: 'bottom',
             })
           }

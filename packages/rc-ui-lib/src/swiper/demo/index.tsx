@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { components } from 'site-mobile-demo';
 import { Toast, Image, Button, Popup } from '../..';
 import Swiper from '..';
+import { useSwiperDemoI18n } from './locale';
 import './style.less';
 
 const images = [
@@ -16,28 +17,29 @@ const images = [
 ];
 const colors = ['#ace0ff', '#bcffbd', '#e4fabd', '#ffcfac'];
 
-const items = colors.map((color, index) => (
-  <Swiper.Item key={color}>
-    <div
-      onClick={() => {
-        Toast.info(`你点击了卡片 ${index + 1}`);
-      }}
-    >
-      {index + 1}
-    </div>
-  </Swiper.Item>
-));
-
 export default (): React.ReactNode => {
   const { DemoBlock, DemoSection } = components;
   const [visible, set] = useState(false);
+  const t = useSwiperDemoI18n();
+
+  const items = colors.map((color, index) => (
+    <Swiper.Item key={color}>
+      <div
+        onClick={() => {
+          Toast.info(t.toastClickCard(index));
+        }}
+      >
+        {index + 1}
+      </div>
+    </Swiper.Item>
+  ));
 
   return (
     <DemoSection>
-      <DemoBlock title="基础用法">
+      <DemoBlock title={t.demoTitleBasic}>
         <Swiper autoplayInterval={5000} defaultIndex={1}>{items}</Swiper>
       </DemoBlock>
-      <DemoBlock title="懒加载">
+      <DemoBlock title={t.demoTitleLazy}>
         <Swiper>
           {images.map((image) => (
             <Swiper.Item key={image}>
@@ -46,28 +48,28 @@ export default (): React.ReactNode => {
           ))}
         </Swiper>
       </DemoBlock>
-      <DemoBlock title="监听onIndexChange事件">
-        <Swiper onIndexChange={(i) => Toast(`当前索引${i}`)}>{items}</Swiper>
+      <DemoBlock title={t.demoTitleEvent}>
+        <Swiper onIndexChange={(i) => Toast(t.toastCurrentIndex(i))}>{items}</Swiper>
       </DemoBlock>
-      <DemoBlock title="纵向滚动">
+      <DemoBlock title={t.demoTitleVertical}>
         <Swiper autoplayInterval={5000} direction="vertical" style={{ height: 150 }}>
           {items}
         </Swiper>
       </DemoBlock>
-      <DemoBlock title="自定义滑块大小">
+      <DemoBlock title={t.demoTitleSlideSize}>
         <Swiper slideSize={80}>{items}</Swiper>
       </DemoBlock>
-      <DemoBlock title="滑块居中">
+      <DemoBlock title={t.demoTitleCenter}>
         <Swiper slideSize={80} trackOffset={10}>
           {items}
         </Swiper>
       </DemoBlock>
-      <DemoBlock title="纵向滑块居中">
+      <DemoBlock title={t.demoTitleVerticalCenter}>
         <Swiper style={{ height: 150 }} direction="vertical" slideSize={80} trackOffset={10}>
           {items}
         </Swiper>
       </DemoBlock>
-      <DemoBlock title="自定义指示器">
+      <DemoBlock title={t.demoTitleIndicator}>
         <Swiper
           indicator={(total, current) => (
             <div className="custom-indicator">
@@ -79,10 +81,10 @@ export default (): React.ReactNode => {
         </Swiper>
       </DemoBlock>
 
-      <DemoBlock title="Popup中展示">
+      <DemoBlock title={t.demoTitlePopup}>
         <div className="p-default">
           <Button block round type="primary" onClick={() => set(true)}>
-            Popup中展示轮播图
+            {t.btnPopupSwiper}
           </Button>
         </div>
         <Popup

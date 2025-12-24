@@ -1,28 +1,30 @@
 import React from 'react';
 import { components } from 'site-mobile-demo';
 import { Grid, Image } from '../..';
+import { useGridDemoI18n } from './locale';
 import './style.less';
 
 export default (): React.ReactNode => {
   const { DemoBlock, DemoSection } = components;
+  const t = useGridDemoI18n();
   return (
     <DemoSection className="demo-grid">
-      <DemoBlock title="基础用法">
+      <DemoBlock title={t.demoTitleBasic}>
         <Grid>
-          <Grid.Item icon="photo-o" text="文字" />
-          <Grid.Item icon="photo-o" text="文字" />
-          <Grid.Item icon="photo-o" text="文字" />
-          <Grid.Item icon="photo-o" text="文字" />
+          <Grid.Item icon="photo-o" text={t.text} />
+          <Grid.Item icon="photo-o" text={t.text} />
+          <Grid.Item icon="photo-o" text={t.text} />
+          <Grid.Item icon="photo-o" text={t.text} />
         </Grid>
       </DemoBlock>
-      <DemoBlock title="自定义列数">
+      <DemoBlock title={t.demoTitleColumnNum}>
         <Grid columnNum={3}>
           {Array.from({ length: 6 }, (_, i) => (
-            <Grid.Item key={i} icon="photo-o" text="文字" />
+            <Grid.Item key={i} icon="photo-o" text={t.text} />
           ))}
         </Grid>
       </DemoBlock>
-      <DemoBlock title="自定义内容">
+      <DemoBlock title={t.demoTitleCustomContent}>
         <Grid border={false} columnNum={3}>
           <Grid.Item>
             <Image src="https://img.yzcdn.cn/vant/apple-1.jpg" />
@@ -35,31 +37,31 @@ export default (): React.ReactNode => {
           </Grid.Item>
         </Grid>
       </DemoBlock>
-      <DemoBlock title="正方形格子">
+      <DemoBlock title={t.demoTitleSquare}>
         <Grid square>
           {Array.from({ length: 8 }, (_, i) => (
-            <Grid.Item key={i} icon="photo-o" text="文字" />
+            <Grid.Item key={i} icon="photo-o" text={t.text} />
           ))}
         </Grid>
       </DemoBlock>
-      <DemoBlock title="格子间距">
+      <DemoBlock title={t.demoTitleGutter}>
         <Grid gutter={10}>
           {Array.from({ length: 8 }, (_, i) => (
-            <Grid.Item key={i} icon="photo-o" text="文字" />
+            <Grid.Item key={i} icon="photo-o" text={t.text} />
           ))}
         </Grid>
       </DemoBlock>
-      <DemoBlock title="内容横排">
+      <DemoBlock title={t.demoTitleDirection}>
         <Grid direction="horizontal" columnNum={3}>
-          <Grid.Item icon="photo-o" text="文字" />
-          <Grid.Item icon="photo-o" text="文字" />
-          <Grid.Item icon="photo-o" text="文字" />
+          <Grid.Item icon="photo-o" text={t.text} />
+          <Grid.Item icon="photo-o" text={t.text} />
+          <Grid.Item icon="photo-o" text={t.text} />
         </Grid>
       </DemoBlock>
-      <DemoBlock title="徽标提示">
+      <DemoBlock title={t.demoTitleBadge}>
         <Grid columnNum={2}>
-          <Grid.Item icon="home-o" text="文字" badge={{ dot: true }} />
-          <Grid.Item icon="search" text="文字" badge={{ content: '99+' }} />
+          <Grid.Item icon="home-o" text={t.text} badge={{ dot: true }} />
+          <Grid.Item icon="search" text={t.text} badge={{ content: '99+' }} />
         </Grid>
       </DemoBlock>
     </DemoSection>

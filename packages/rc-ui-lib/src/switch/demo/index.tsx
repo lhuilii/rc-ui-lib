@@ -3,47 +3,49 @@ import React, { useState } from 'react';
 import { components } from 'site-mobile-demo';
 import { Dialog, Cell } from '../..';
 import Switch from '..';
+import { useSwitchDemoI18n } from './locale';
 import './style.less';
 
 export default (): React.ReactNode => {
   const { DemoBlock, DemoSection } = components;
+  const t = useSwitchDemoI18n();
 
   const [value, setValue] = useState(false);
 
   return (
     <DemoSection>
-      <DemoBlock title="基础用法">
+      <DemoBlock title={t.demoTitleBasic}>
         <Switch defaultChecked onChange={(checked) => console.log(`switch to ${checked}`)} />
       </DemoBlock>
-      <DemoBlock title="禁用状态">
+      <DemoBlock title={t.demoTitleDisabled}>
         <Switch disabled defaultChecked />
       </DemoBlock>
-      <DemoBlock title="加载状态">
+      <DemoBlock title={t.demoTitleLoading}>
         <Switch loading defaultChecked />
       </DemoBlock>
-      <DemoBlock title="自定义大小">
+      <DemoBlock title={t.demoTitleSize}>
         <Switch size="24px" defaultChecked />
       </DemoBlock>
-      <DemoBlock title="自定义颜色">
+      <DemoBlock title={t.demoTitleColor}>
         <Switch activeColor="#ee0a24" inactiveColor="#dcdee0" defaultChecked />
       </DemoBlock>
-      <DemoBlock title="异步控制">
+      <DemoBlock title={t.demoTitleAsync}>
         <Switch
           checked={value}
           onChange={(checked) => {
             Dialog.confirm({
-              title: '提醒',
-              message: '是否切换开关？',
+              title: t.dialogTitle,
+              message: t.dialogMessage,
             }).then(() => {
               setValue(checked);
             });
           }}
         />
       </DemoBlock>
-      <DemoBlock title="搭配单元格使用">
+      <DemoBlock title={t.demoTitleCell}>
         <Cell
           center
-          title="标题"
+          title={t.cellTitle}
           rightIcon={
             <Switch
               size={24}

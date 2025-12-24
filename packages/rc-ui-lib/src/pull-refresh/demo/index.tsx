@@ -4,22 +4,24 @@ import { components } from 'site-mobile-demo';
 import { Tabs, Toast } from '../..';
 import './style.less';
 import PullRefresh from '../index';
+import { usePullRefreshDemoI18n } from './locale';
 
 export default (): React.ReactNode => {
   const { DemoSection } = components;
   const [count, setCount] = useState<number>(0);
+  const t = usePullRefreshDemoI18n();
   const tips = useMemo(() => {
     if (count) {
-      return `刷新次数: ${count}`;
+      return t.tipsWithCount(count);
     }
-    return '下拉试试';
-  }, [count]);
+    return t.tipsDefault;
+  }, [count, t]);
 
   const onRefresh = (showToast) => {
     return new Promise((resolve) => {
       setTimeout(() => {
         if (showToast) {
-          Toast.info('刷新成功');
+          Toast.info(t.toastSuccess);
         }
         setCount(count + 1);
         resolve(true);
@@ -30,17 +32,17 @@ export default (): React.ReactNode => {
   return (
     <DemoSection>
       <Tabs>
-        <Tabs.TabPane title="基础用法">
+        <Tabs.TabPane title={t.tabBasic}>
           <PullRefresh onRefresh={() => onRefresh(true)}>
             <p>{tips}</p>
           </PullRefresh>
         </Tabs.TabPane>
-        <Tabs.TabPane title="成功提示">
-          <PullRefresh successText="刷新成功" onRefresh={() => onRefresh(false)}>
+        <Tabs.TabPane title={t.tabSuccess}>
+          <PullRefresh successText={t.successText} onRefresh={() => onRefresh(false)}>
             <p>{tips}</p>
           </PullRefresh>
         </Tabs.TabPane>
-        <Tabs.TabPane title="自定义内容">
+        <Tabs.TabPane title={t.tabCustom}>
           <PullRefresh
             headHeight={80}
             pullingText={({ distance }) => (

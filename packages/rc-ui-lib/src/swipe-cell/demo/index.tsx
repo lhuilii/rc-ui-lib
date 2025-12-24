@@ -2,16 +2,18 @@ import React from 'react';
 import { components } from 'site-mobile-demo';
 import SwipeCell from '..';
 import { Dialog, Button, Cell } from '../..';
+import { useSwipeCellDemoI18n } from './locale';
 import './style.less';
 
 export default (): React.ReactNode => {
   const { DemoSection, DemoBlock } = components;
+  const t = useSwipeCellDemoI18n();
 
   const beforeClose = ({ position, instance }) => {
     switch (position) {
       case 'right':
         Dialog.confirm({
-          title: 'confirm',
+          title: t.dialogTitle,
         }).then(() => {
           instance.close();
         });
@@ -28,40 +30,40 @@ export default (): React.ReactNode => {
 
   return (
     <DemoSection>
-      <DemoBlock title="基础用法">
+      <DemoBlock title={t.demoTitleBasic}>
         <SwipeCell
-          left={<Button square type="primary" text="选择" />}
+          left={<Button square type="primary" text={t.btnSelect} />}
           right={
             <>
-              <Button square type="danger" text="删除" />
-              <Button square type="primary" text="收藏" />
+              <Button square type="danger" text={t.btnDelete} />
+              <Button square type="primary" text={t.btnCollect} />
             </>
           }
         >
-          <Cell title="单元格" value="内容" />
+          <Cell title={t.cellTitle} value={t.cellValue} />
         </SwipeCell>
       </DemoBlock>
-      <DemoBlock title="禁止滑动">
+      <DemoBlock title={t.demoTitleDisabled}>
         <SwipeCell
           disabled
-          left={<Button square type="primary" text="选择" />}
+          left={<Button square type="primary" text={t.btnSelect} />}
           right={
             <>
-              <Button square type="danger" text="删除" />
-              <Button square type="primary" text="收藏" />
+              <Button square type="danger" text={t.btnDelete} />
+              <Button square type="primary" text={t.btnCollect} />
             </>
           }
         >
-          <Cell title="单元格" value="内容" />
+          <Cell title={t.cellTitle} value={t.cellValue} />
         </SwipeCell>
       </DemoBlock>
-      <DemoBlock title="异步关闭">
+      <DemoBlock title={t.demoTitleAsync}>
         <SwipeCell
           beforeClose={beforeClose}
-          left={<Button square type="primary" text="选择" />}
-          right={<Button square type="danger" text="删除" />}
+          left={<Button square type="primary" text={t.btnSelect} />}
+          right={<Button square type="danger" text={t.btnDelete} />}
         >
-          <Cell title="单元格" value="内容" />
+          <Cell title={t.cellTitle} value={t.cellValue} />
         </SwipeCell>
       </DemoBlock>
     </DemoSection>

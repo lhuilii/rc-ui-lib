@@ -2,55 +2,57 @@ import React from 'react';
 import { components } from 'site-mobile-demo';
 import { Icon } from '../..';
 import Collapse from '..';
+import { useCollapseDemoI18n } from './locale';
 import './style.less';
 
 export default (): React.ReactNode => {
   const { DemoBlock, DemoSection } = components;
+  const t = useCollapseDemoI18n();
   return (
     <DemoSection>
-      <DemoBlock title="基础用法">
+      <DemoBlock title={t.demoTitleBasic}>
         <Collapse initValue={['1']}>
-          <Collapse.Item title="标题1" name="1">
-            代码是写出来给人看的，附带能在机器上运行
+          <Collapse.Item title={t.title1} name="1">
+            {t.content}
           </Collapse.Item>
-          <Collapse.Item title="标题2" name="2">
-            代码是写出来给人看的，附带能在机器上运行
+          <Collapse.Item title={t.title2} name="2">
+            {t.content}
           </Collapse.Item>
-          <Collapse.Item title="标题3" name="3">
-            代码是写出来给人看的，附带能在机器上运行
+          <Collapse.Item title={t.title3} name="3">
+            {t.content}
           </Collapse.Item>
         </Collapse>
       </DemoBlock>
-      <DemoBlock title="手风琴">
+      <DemoBlock title={t.demoTitleAccordion}>
         <Collapse initValue="1" accordion>
           <Collapse.Item
             title={
               <div>
-                标题1 <Icon name="question-o" />
+                {t.title1} <Icon name="question-o" />
               </div>
             }
             name="1"
           >
-            代码是写出来给人看的，附带能在机器上运行
+            {t.content}
           </Collapse.Item>
-          <Collapse.Item title="标题2" name="2">
-            代码是写出来给人看的，附带能在机器上运行
+          <Collapse.Item title={t.title2} name="2">
+            {t.content}
           </Collapse.Item>
-          <Collapse.Item title="标题3" name="3">
-            代码是写出来给人看的，附带能在机器上运行
+          <Collapse.Item title={t.title3} name="3">
+            {t.content}
           </Collapse.Item>
         </Collapse>
       </DemoBlock>
-      <DemoBlock initValue={[]} title="禁用状态">
+      <DemoBlock initValue={[]} title={t.demoTitleDisabled}>
         <Collapse>
-          <Collapse.Item title="标题1" name="1">
-            代码是写出来给人看的，附带能在机器上运行
+          <Collapse.Item title={t.title1} name="1">
+            {t.content}
           </Collapse.Item>
-          <Collapse.Item title="标题2" name="2" readonly>
-            代码是写出来给人看的，附带能在机器上运行
+          <Collapse.Item title={t.title2} name="2" readonly>
+            {t.content}
           </Collapse.Item>
-          <Collapse.Item title="标题3" name="3" disabled>
-            代码是写出来给人看的，附带能在机器上运行
+          <Collapse.Item title={t.title3} name="3" disabled>
+            {t.content}
           </Collapse.Item>
         </Collapse>
       </DemoBlock>

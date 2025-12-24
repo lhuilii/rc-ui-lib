@@ -2,42 +2,44 @@ import React, { useRef } from 'react';
 import { components } from 'site-mobile-demo';
 import { Button } from '../..';
 import Sticky from '..';
+import { useStickyDemoI18n } from './locale';
 import './style.less';
 
 export default (): React.ReactNode => {
   const { DemoBlock, DemoSection } = components;
   const container = useRef<HTMLDivElement>(null);
+  const t = useStickyDemoI18n();
 
   return (
     <DemoSection>
-      <DemoBlock title="基础用法">
+      <DemoBlock title={t.demoTitleBasic}>
         <Sticky>
           <Button type="primary" style={{ marginLeft: '15px' }}>
-            基础用法
+            {t.btnBasic}
           </Button>
         </Sticky>
       </DemoBlock>
-      <DemoBlock title="吸顶距离">
+      <DemoBlock title={t.demoTitleOffsetTop}>
         <Sticky offsetTop={50}>
           <Button type="info" style={{ marginLeft: '115px' }}>
-            吸顶距离
+            {t.btnOffsetTop}
           </Button>
         </Sticky>
       </DemoBlock>
-      <DemoBlock title="指定容器">
+      <DemoBlock title={t.demoTitleContainer}>
         <div ref={container} style={{ height: '150px', backgroundColor: '#fff' }}>
           <Sticky container={container}>
             <Button type="warning" style={{ marginLeft: '215px' }}>
-              指定容器
+              {t.btnContainer}
             </Button>
           </Sticky>
         </div>
       </DemoBlock>
-      <DemoBlock title="吸底距离">
+      <DemoBlock title={t.demoTitleOffsetBottom}>
         <div style={{ height: 200 }} />
         <Sticky position="bottom" offsetBottom={50}>
           <Button type="info" style={{ marginLeft: '15px' }}>
-            吸底距离
+            {t.btnOffsetBottom}
           </Button>
         </Sticky>
       </DemoBlock>

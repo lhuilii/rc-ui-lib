@@ -1,0 +1,88 @@
+import { createDemoI18n, DemoLang } from '../../utils/lang';
+
+const messages: Record<DemoLang, any> = {
+  'zh-CN': {
+    demoTitleBasic: '基础用法',
+    demoTitleDynamic: '动态更新提示',
+    demoTitleCustomIcon: '自定义图标',
+    demoTitleCustomPosition: '自定义位置',
+
+    cellText: '文字提示',
+    cellLoading: '加载提示',
+    cellSuccess: '成功提示',
+    cellFail: '失败提示',
+    cellDynamic: '动态更新提示',
+    cellCustomIcon: '自定义图标',
+    cellCustomImage: '自定义图片',
+    cellCustomLoading: '自定义加载图标',
+    cellTop: '顶部展示',
+    cellBottom: '底部展示',
+
+    toastInfo: '提示内容',
+    toastLoading: '加载中...',
+    toastSuccess: '成功文案',
+    toastFail: '失败文案',
+    toastRemain: (remain: number) => `还剩 ${remain} 秒`,
+    toastCustomIcon: '自定义图标',
+    toastCustomImage: '自定义图片',
+    toastTop: '顶部展示',
+    toastBottom: '底部展示',
+  },
+  'zh-TW': {
+    demoTitleBasic: '基礎用法',
+    demoTitleDynamic: '動態更新提示',
+    demoTitleCustomIcon: '自定義圖標',
+    demoTitleCustomPosition: '自定義位置',
+
+    cellText: '文字提示',
+    cellLoading: '加載提示',
+    cellSuccess: '成功提示',
+    cellFail: '失敗提示',
+    cellDynamic: '動態更新提示',
+    cellCustomIcon: '自定義圖標',
+    cellCustomImage: '自定義圖片',
+    cellCustomLoading: '自定義加載圖標',
+    cellTop: '頂部展示',
+    cellBottom: '底部展示',
+
+    toastInfo: '提示內容',
+    toastLoading: '加載中...',
+    toastSuccess: '成功文案',
+    toastFail: '失敗文案',
+    toastRemain: (remain: number) => `還剩 ${remain} 秒`,
+    toastCustomIcon: '自定義圖標',
+    toastCustomImage: '自定義圖片',
+    toastTop: '頂部展示',
+    toastBottom: '底部展示',
+  },
+  'en-US': {
+    demoTitleBasic: 'Basic Usage',
+    demoTitleDynamic: 'Dynamic Update',
+    demoTitleCustomIcon: 'Custom Icon',
+    demoTitleCustomPosition: 'Custom Position',
+
+    cellText: 'Text',
+    cellLoading: 'Loading',
+    cellSuccess: 'Success',
+    cellFail: 'Fail',
+    cellDynamic: 'Dynamic Update',
+    cellCustomIcon: 'Custom Icon',
+    cellCustomImage: 'Custom Image',
+    cellCustomLoading: 'Custom Loading Icon',
+    cellTop: 'Top',
+    cellBottom: 'Bottom',
+
+    toastInfo: 'Message',
+    toastLoading: 'Loading...',
+    toastSuccess: 'Success',
+    toastFail: 'Fail',
+    toastRemain: (remain: number) => `${remain}s remaining`,
+    toastCustomIcon: 'Custom Icon',
+    toastCustomImage: 'Custom Image',
+    toastTop: 'Top',
+    toastBottom: 'Bottom',
+  },
+};
+
+export const useToastDemoI18n = createDemoI18n(messages);
+

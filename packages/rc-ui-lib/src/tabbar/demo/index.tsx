@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { components } from 'site-mobile-demo';
 import { Toast } from '../..';
 import Tabbar from '..';
+import { useTabbarDemoI18n } from './locale';
 import './style.less';
 
 const icon = {
@@ -12,17 +13,18 @@ const icon = {
 export default (): React.ReactNode => {
   const { DemoBlock, DemoSection } = components;
   const [name, setName] = useState('setting');
+  const t = useTabbarDemoI18n();
   return (
     <DemoSection className="demo-badge">
-      <DemoBlock title="基础用法">
+      <DemoBlock title={t.demoTitleBasic}>
         <Tabbar>
-          <Tabbar.Item icon="home-o">标签</Tabbar.Item>
-          <Tabbar.Item icon="search">标签</Tabbar.Item>
-          <Tabbar.Item icon="friends-o">标签</Tabbar.Item>
-          <Tabbar.Item icon="setting-o">标签</Tabbar.Item>
+          <Tabbar.Item icon="home-o">{t.tabLabel}</Tabbar.Item>
+          <Tabbar.Item icon="search">{t.tabLabel}</Tabbar.Item>
+          <Tabbar.Item icon="friends-o">{t.tabLabel}</Tabbar.Item>
+          <Tabbar.Item icon="setting-o">{t.tabLabel}</Tabbar.Item>
         </Tabbar>
       </DemoBlock>
-      <DemoBlock title="通过名称匹配">
+      <DemoBlock title={t.demoTitleName}>
         <Tabbar
           value={name}
           onChange={(v) => {
@@ -30,56 +32,56 @@ export default (): React.ReactNode => {
           }}
         >
           <Tabbar.Item name="home" icon="home-o">
-            标签
+            {t.tabLabel}
           </Tabbar.Item>
           <Tabbar.Item name="search" icon="search">
-            标签
+            {t.tabLabel}
           </Tabbar.Item>
           <Tabbar.Item name="firends" icon="friends-o">
-            标签
+            {t.tabLabel}
           </Tabbar.Item>
           <Tabbar.Item name="setting" icon="setting-o">
-            标签
+            {t.tabLabel}
           </Tabbar.Item>
         </Tabbar>
       </DemoBlock>
-      <DemoBlock title="徽标提示">
+      <DemoBlock title={t.demoTitleBadge}>
         <Tabbar>
-          <Tabbar.Item icon="home-o">标签</Tabbar.Item>
+          <Tabbar.Item icon="home-o">{t.tabLabel}</Tabbar.Item>
           <Tabbar.Item badge={{ dot: true }} icon="search">
-            标签
+            {t.tabLabel}
           </Tabbar.Item>
           <Tabbar.Item badge={{ content: 5 }} icon="friends-o">
-            标签
+            {t.tabLabel}
           </Tabbar.Item>
           <Tabbar.Item badge={{ content: 20 }} icon="setting-o">
-            标签
+            {t.tabLabel}
           </Tabbar.Item>
         </Tabbar>
       </DemoBlock>
-      <DemoBlock title="自定义图标">
+      <DemoBlock title={t.demoTitleCustomIcon}>
         <Tabbar>
           <Tabbar.Item icon={(ac) => <img alt="" src={ac ? icon.active : icon.inactive} />}>
-            标签
+            {t.tabLabel}
           </Tabbar.Item>
-          <Tabbar.Item icon="friends-o">标签</Tabbar.Item>
-          <Tabbar.Item icon="setting-o">标签</Tabbar.Item>
+          <Tabbar.Item icon="friends-o">{t.tabLabel}</Tabbar.Item>
+          <Tabbar.Item icon="setting-o">{t.tabLabel}</Tabbar.Item>
         </Tabbar>
       </DemoBlock>
-      <DemoBlock title="自定义颜色">
+      <DemoBlock title={t.demoTitleCustomColor}>
         <Tabbar activeColor="#f44336" inactiveColor="#000">
-          <Tabbar.Item icon="home-o">标签</Tabbar.Item>
-          <Tabbar.Item icon="search">标签</Tabbar.Item>
-          <Tabbar.Item icon="friends-o">标签</Tabbar.Item>
-          <Tabbar.Item icon="setting-o">标签</Tabbar.Item>
+          <Tabbar.Item icon="home-o">{t.tabLabel}</Tabbar.Item>
+          <Tabbar.Item icon="search">{t.tabLabel}</Tabbar.Item>
+          <Tabbar.Item icon="friends-o">{t.tabLabel}</Tabbar.Item>
+          <Tabbar.Item icon="setting-o">{t.tabLabel}</Tabbar.Item>
         </Tabbar>
       </DemoBlock>
-      <DemoBlock title="监听切换事件">
-        <Tabbar onChange={(v) => Toast.info(`标签${+v + 1}`)}>
-          <Tabbar.Item icon="home-o">标签</Tabbar.Item>
-          <Tabbar.Item icon="search">标签</Tabbar.Item>
-          <Tabbar.Item icon="friends-o">标签</Tabbar.Item>
-          <Tabbar.Item icon="setting-o">标签</Tabbar.Item>
+      <DemoBlock title={t.demoTitleEvent}>
+        <Tabbar onChange={(v) => Toast.info(t.toastLabel(+v))}>
+          <Tabbar.Item icon="home-o">{t.tabLabel}</Tabbar.Item>
+          <Tabbar.Item icon="search">{t.tabLabel}</Tabbar.Item>
+          <Tabbar.Item icon="friends-o">{t.tabLabel}</Tabbar.Item>
+          <Tabbar.Item icon="setting-o">{t.tabLabel}</Tabbar.Item>
         </Tabbar>
       </DemoBlock>
     </DemoSection>

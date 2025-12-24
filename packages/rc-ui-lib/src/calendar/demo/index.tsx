@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { components } from 'site-mobile-demo';
 import { Cell } from '../..';
 import Calendar, { CalendarDayItem, CalendarType } from '..';
+import { useCalendarDemoI18n } from './locale';
 
 const DEFAULT_PROPS = {
   id: '',
@@ -23,6 +24,7 @@ const DEFAULT_PROPS = {
 
 export default (): React.ReactNode => {
   const { DemoBlock, DemoSection } = components;
+  const t = useCalendarDemoI18n();
   const [showCalendar, setShowCalendar] = useState(false);
   const [date, setDate] = useState({
     maxRange: [],
@@ -53,18 +55,18 @@ export default (): React.ReactNode => {
 
     if (month === 5) {
       if (date === 1) {
-        day.topInfo = '劳动节';
+        day.topInfo = t.laborDay;
       } else if (date === 4) {
-        day.topInfo = '青年节';
+        day.topInfo = t.youthDay;
       } else if (date === 11) {
-        day.text = '今天';
+        day.text = t.today;
       }
     }
 
     if (day.type === 'start') {
-      day.bottomInfo = '入店';
+      day.bottomInfo = t.checkIn;
     } else if (day.type === 'end') {
-      day.bottomInfo = '离店';
+      day.bottomInfo = t.checkOut;
     }
 
     return day;
@@ -85,8 +87,8 @@ export default (): React.ReactNode => {
         state.color = '#1989fa';
         break;
       case 'customConfirm':
-        state.confirmText = '完成';
-        state.confirmDisabledText = '请选择结束时间';
+        state.confirmText = t.confirmText;
+        state.confirmDisabledText = t.confirmDisabledText;
         break;
       case 'customRange':
         state.minDate = new Date(2010, 0, 1);
@@ -131,7 +133,7 @@ export default (): React.ReactNode => {
 
   const formatMultiple = (dates: Date[]) => {
     if (dates.length) {
-      return `选择了 ${dates.length} 个日期`;
+      return t.selectedCount.replace('{count}', String(dates.length));
     }
     return '';
   };
@@ -157,80 +159,80 @@ export default (): React.ReactNode => {
 
   return (
     <DemoSection className="demo-cascader">
-      <DemoBlock card title="基础用法">
+      <DemoBlock card title={t.demoTitleBasic}>
         <Cell
           isLink
-          title="选择单个日期"
+          title={t.selectSingle}
           value={formatFullDate(date.selectSingle)}
           onClick={() => show('single', 'selectSingle')}
         />
         <Cell
           isLink
-          title="选择多个日期"
+          title={t.selectMultiple}
           value={formatMultiple(date.selectMultiple)}
           onClick={() => show('multiple', 'selectMultiple')}
         />
         <Cell
           isLink
-          title="选择日期区间"
+          title={t.selectRange}
           value={formatRange(date.selectRange)}
           onClick={() => show('range', 'selectRange')}
         />
       </DemoBlock>
-      <DemoBlock card title="快捷选择">
+      <DemoBlock card title={t.demoTitleQuickSelect}>
         <Cell
           isLink
-          title="选择单个日期"
+          title={t.selectSingle}
           value={formatFullDate(date.quickSelect1)}
           onClick={() => show('single', 'quickSelect1')}
         />
         <Cell
           isLink
-          title="选择日期区间"
+          title={t.selectRange}
           value={formatRange(date.quickSelect2)}
           onClick={() => show('range', 'quickSelect2')}
         />
       </DemoBlock>
-      <DemoBlock card title="自定义日历">
+      <DemoBlock card title={t.demoTitleCustom}>
         <Cell
           isLink
-          title="自定义颜色"
+          title={t.customColor}
           value={formatRange(date.customColor)}
           onClick={() => show('range', 'customColor')}
         />
         <Cell
           isLink
-          title="自定义日期范围"
+          title={t.customRange}
           value={formatFullDate(date.customRange)}
           onClick={() => show('single', 'customRange')}
         />
         <Cell
           isLink
-          title="自定义按钮文字"
+          title={t.customConfirm}
           value={formatRange(date.customConfirm)}
           onClick={() => show('range', 'customConfirm')}
         />
         <Cell
           isLink
-          title="自定义日期文案"
+          title={t.customDayText}
           value={formatRange(date.customDayText)}
           onClick={() => show('range', 'customDayText')}
         />
         <Cell
           isLink
-          title="自定义弹出位置"
+          title={t.customPosition}
           value={formatFullDate(date.customPosition)}
           onClick={() => show('single', 'customPosition')}
         />
         <Cell
           isLink
-          title="日期区间最大范围"
+          title={t.maxRange}
           value={formatRange(date.maxRange)}
           onClick={() => show('range', 'maxRange')}
         />
-        <Cell isLink title="自定义周起始日" onClick={() => show('single', 'firstDayOfWeek')} />
+        <Cell isLink title={t.firstDayOfWeek} onClick={() => show('single', 'firstDayOfWeek')} />
       </DemoBlock>
-      <DemoBlock card title="平铺模式">
+      <DemoBlock card title={t.demoTitlePoppable}>
         <Calendar
           type="single"
           poppable={false}

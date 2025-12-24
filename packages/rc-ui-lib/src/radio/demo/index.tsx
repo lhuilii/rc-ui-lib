@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { components } from 'site-mobile-demo';
 import { Cell, Toast } from '../..';
 import { Radio } from '..';
+import { useRadioDemoI18n } from './locale';
 import './style.less';
 
 let timer;
@@ -11,82 +12,83 @@ export default (): React.ReactNode => {
   const [cellValue, setCellValue] = useState('');
 
   const { DemoBlock, DemoSection } = components;
+  const t = useRadioDemoI18n();
 
   return (
     <DemoSection>
-      <DemoBlock title="基础用法">
+      <DemoBlock title={t.demoTitleBasic}>
         <div className="demo-radio-group">
           <Radio.Group defaultValue="1">
-            <Radio name="1">单选框1</Radio>
-            <Radio name="2">单选框2</Radio>
+            <Radio name="1">{t.radio1}</Radio>
+            <Radio name="2">{t.radio2}</Radio>
           </Radio.Group>
         </div>
       </DemoBlock>
-      <DemoBlock title="水平排列">
+      <DemoBlock title={t.demoTitleHorizontal}>
         <div className="demo-radio-group">
           <Radio.Group defaultValue="1" direction="horizontal">
-            <Radio name="1">单选框1</Radio>
-            <Radio name="2">单选框2</Radio>
+            <Radio name="1">{t.radio1}</Radio>
+            <Radio name="2">{t.radio2}</Radio>
           </Radio.Group>
         </div>
       </DemoBlock>
-      <DemoBlock title="禁用状态">
+      <DemoBlock title={t.demoTitleDisabled}>
         <div className="demo-radio-group">
           <Radio.Group defaultValue="1" disabled>
-            <Radio name="1">单选框1</Radio>
-            <Radio name="2">单选框2</Radio>
+            <Radio name="1">{t.radio1}</Radio>
+            <Radio name="2">{t.radio2}</Radio>
           </Radio.Group>
         </div>
       </DemoBlock>
-      <DemoBlock title="自定义形状">
+      <DemoBlock title={t.demoTitleShape}>
         <div className="demo-radio-group">
           <Radio.Group defaultValue="1">
             <Radio name="1" shape="square">
-              单选框1
+              {t.radio1}
             </Radio>
             <Radio name="2" shape="square">
-              单选框2
+              {t.radio2}
             </Radio>
           </Radio.Group>
         </div>
       </DemoBlock>
-      <DemoBlock title="自定义颜色">
+      <DemoBlock title={t.demoTitleColor}>
         <div className="demo-radio-group">
           <Radio.Group defaultValue="1">
             <Radio name="1" checkedColor="#ee0a24">
-              单选框1
+              {t.radio1}
             </Radio>
             <Radio name="2" checkedColor="#ee0a24">
-              单选框2
+              {t.radio2}
             </Radio>
           </Radio.Group>
         </div>
       </DemoBlock>
-      <DemoBlock title="自定义大小">
+      <DemoBlock title={t.demoTitleSize}>
         <div className="demo-radio-group">
           <Radio.Group defaultValue="1">
             <Radio name="1" iconSize="24px">
-              单选框1
+              {t.radio1}
             </Radio>
             <Radio name="2" iconSize="24px">
-              单选框2
+              {t.radio2}
             </Radio>
           </Radio.Group>
         </div>
       </DemoBlock>
-      <DemoBlock title="禁止文本点击">
+      <DemoBlock title={t.demoTitleLabelDisabled}>
         <div className="demo-radio-group">
           <Radio.Group defaultValue="1">
             <Radio name="1" labelDisabled>
-              单选框1
+              {t.radio1}
             </Radio>
             <Radio name="2" labelDisabled>
-              单选框2
+              {t.radio2}
             </Radio>
           </Radio.Group>
         </div>
       </DemoBlock>
-      <DemoBlock title="异步更新">
+      <DemoBlock title={t.demoTitleAsync}>
         <div className="demo-radio-group">
           <Radio.Group
             value={value}
@@ -100,27 +102,27 @@ export default (): React.ReactNode => {
             }}
           >
             <Radio name="1" labelDisabled>
-              单选框 1
+              {t.radio1WithSpace}
             </Radio>
             <Radio name="2" labelDisabled>
-              单选框 2
+              {t.radio2WithSpace}
             </Radio>
           </Radio.Group>
         </div>
       </DemoBlock>
-      <DemoBlock title="搭配单元格组件使用">
+      <DemoBlock title={t.demoTitleCell}>
         <Radio.Group value={cellValue}>
           <Cell.Group>
             <Cell
               clickable
-              title="单选框1"
+              title={t.cellRadio1}
               icon="shop-o"
               onClick={() => setCellValue('1')}
               rightIcon={<Radio name="1" />}
             />
             <Cell
               clickable
-              title="单选框2"
+              title={t.cellRadio2}
               icon="shop-o"
               onClick={() => setCellValue('2')}
               rightIcon={<Radio name="2" />}

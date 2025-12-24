@@ -3,6 +3,7 @@ import React, { useReducer } from 'react';
 import { components } from 'site-mobile-demo';
 import { Cell } from '../..';
 import Popup from '..';
+import { usePopupDemoI18n } from './locale';
 import './style.less';
 
 const initialState = {
@@ -46,12 +47,13 @@ function reducer(state, action) {
 export default (): React.ReactNode => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { DemoBlock, DemoSection } = components;
+  const t = usePopupDemoI18n();
 
   return (
     <DemoSection>
-      <DemoBlock card title="基础用法">
+      <DemoBlock card title={t.demoTitleBasic}>
         <Cell
-          title="展示弹出层"
+          title={t.cellShowBasic}
           isLink
           onClick={() =>
             dispatch({
@@ -60,9 +62,9 @@ export default (): React.ReactNode => {
           }
         />
       </DemoBlock>
-      <DemoBlock card title="弹出位置">
+      <DemoBlock card title={t.demoTitlePosition}>
         <Cell
-          title="顶部弹出"
+          title={t.cellTop}
           isLink
           onClick={() =>
             dispatch({
@@ -71,7 +73,7 @@ export default (): React.ReactNode => {
           }
         />
         <Cell
-          title="底部弹出"
+          title={t.cellBottom}
           isLink
           onClick={() =>
             dispatch({
@@ -80,7 +82,7 @@ export default (): React.ReactNode => {
           }
         />
         <Cell
-          title="左侧弹出"
+          title={t.cellLeft}
           isLink
           onClick={() =>
             dispatch({
@@ -89,7 +91,7 @@ export default (): React.ReactNode => {
           }
         />
         <Cell
-          title="右侧弹出"
+          title={t.cellRight}
           isLink
           onClick={() =>
             dispatch({
@@ -98,9 +100,9 @@ export default (): React.ReactNode => {
           }
         />
       </DemoBlock>
-      <DemoBlock card title="关闭图标">
+      <DemoBlock card title={t.demoTitleCloseIcon}>
         <Cell
-          title="关闭图标"
+          title={t.cellCloseIcon}
           isLink
           onClick={() =>
             dispatch({
@@ -109,7 +111,7 @@ export default (): React.ReactNode => {
           }
         />
         <Cell
-          title="自定义关闭图标"
+          title={t.cellCustomCloseIcon}
           isLink
           onClick={() =>
             dispatch({
@@ -118,7 +120,7 @@ export default (): React.ReactNode => {
           }
         />
         <Cell
-          title="图标位置"
+          title={t.cellIconPosition}
           isLink
           onClick={() =>
             dispatch({
@@ -127,9 +129,9 @@ export default (): React.ReactNode => {
           }
         />
       </DemoBlock>
-      <DemoBlock card title="圆角弹窗">
+      <DemoBlock card title={t.demoTitleRoundCorner}>
         <Cell
-          title="圆角弹窗"
+          title={t.cellRoundCorner}
           isLink
           onClick={() =>
             dispatch({
@@ -138,9 +140,9 @@ export default (): React.ReactNode => {
           }
         />
       </DemoBlock>
-      <DemoBlock card title="标题弹框">
+      <DemoBlock card title={t.demoTitleWithTitle}>
         <Cell
-          title="标题弹框"
+          title={t.cellTitleDialog}
           isLink
           onClick={() =>
             dispatch({
@@ -164,7 +166,7 @@ export default (): React.ReactNode => {
         onOpen={() => console.log('open')}
         onOpened={() => console.log('opened')}
       >
-        <div style={{ padding: '30px 50px' }}>内容</div>
+        <div style={{ padding: '30px 50px' }}>{t.popupContent}</div>
       </Popup>
       <Popup
         visible={state.showTop}
@@ -260,8 +262,8 @@ export default (): React.ReactNode => {
       <Popup
         visible={state.showTitle}
         closeable
-        title="标题"
-        description="这是一段很长很长的描述这是一段很长很长的描述这是一段很长很长的描述这是一段很长很长的描述"
+        title={t.popupTitle}
+        description={t.popupDescription}
         style={{ height: '30%' }}
         position="bottom"
         round

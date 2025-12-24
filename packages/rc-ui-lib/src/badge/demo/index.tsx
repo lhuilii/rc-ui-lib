@@ -1,13 +1,15 @@
 import React from 'react';
 import { components } from 'site-mobile-demo';
 import { Badge, Icon } from '../..';
+import { useBadgeDemoI18n } from './locale';
 import './style.less';
 
 export default (): React.ReactNode => {
   const { DemoBlock, DemoSection } = components;
+  const t = useBadgeDemoI18n();
   return (
     <DemoSection className="demo-badge">
-      <DemoBlock title="基础用法">
+      <DemoBlock title={t.demoTitleBasic}>
         <Badge content={5}>
           <div className="child" />
         </Badge>
@@ -24,7 +26,7 @@ export default (): React.ReactNode => {
           <div className="child" />
         </Badge>
       </DemoBlock>
-      <DemoBlock title="最大值">
+      <DemoBlock title={t.demoTitleMax}>
         <Badge content={20} max={9}>
           <div className="child" />
         </Badge>
@@ -35,7 +37,7 @@ export default (): React.ReactNode => {
           <div className="child" />
         </Badge>
       </DemoBlock>
-      <DemoBlock title="自定义颜色">
+      <DemoBlock title={t.demoTitleColor}>
         <Badge content={5} color="#1989fa">
           <div className="child" />
         </Badge>
@@ -46,7 +48,7 @@ export default (): React.ReactNode => {
           <div className="child" />
         </Badge>
       </DemoBlock>
-      <DemoBlock title="自定义徽标内容">
+      <DemoBlock title={t.demoTitleContent}>
         <Badge content={<Icon name="success" className="badge-icon" />}>
           <div className="child" />
         </Badge>
@@ -57,7 +59,7 @@ export default (): React.ReactNode => {
           <div className="child" />
         </Badge>
       </DemoBlock>
-      <DemoBlock title="自定义徽标位置">
+      <DemoBlock title={t.demoTitlePosition}>
         <Badge content={10} position="top-left">
           <div className="child" />
         </Badge>
@@ -68,7 +70,7 @@ export default (): React.ReactNode => {
           <div className="child" />
         </Badge>
       </DemoBlock>
-      <DemoBlock title="独立展示">
+      <DemoBlock title={t.demoTitleStandalone}>
         <Badge content="20" style={{ marginRight: 16 }} />
         <Badge content="200" max="99" />
       </DemoBlock>

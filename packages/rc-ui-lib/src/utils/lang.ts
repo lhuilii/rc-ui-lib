@@ -1,5 +1,5 @@
 // packages/rc-ui-lib/src/utils/lang.ts
-export type DemoLang = 'zh-CN' | 'zh-TW';
+export type DemoLang = 'zh-CN' | 'zh-TW' | 'en-US';
 
 export function getDemoLangFromPath(): DemoLang {
   if (typeof window === 'undefined') return 'zh-CN';
@@ -22,7 +22,7 @@ export function getDemoLangFromPath(): DemoLang {
     maybeLang = langFromPath;
   }
 
-  if (maybeLang === 'zh-CN' || maybeLang === 'zh-TW') {
+  if (maybeLang === 'zh-CN' || maybeLang === 'zh-TW' || maybeLang === 'en-US') {
     return maybeLang as DemoLang;
   }
 

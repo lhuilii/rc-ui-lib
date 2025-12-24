@@ -3,6 +3,7 @@ import { components } from 'site-mobile-demo';
 import { RollingText, Button, Grid } from '../..';
 import './style.less';
 import type { RollingTextInstance } from '../PropsType';
+import { useRollingTextDemoI18n } from './locale';
 
 const textList = ['aaaaa', 'bbbbb', 'ccccc', 'ddddd', 'eeeee', 'fffff', 'ggggg'];
 
@@ -15,6 +16,7 @@ export default (): React.ReactNode => {
   const [isStart4, setIsStart4] = useState(false);
 
   const rollingTextRef = useRef<RollingTextInstance>();
+  const t = useRollingTextDemoI18n();
 
   const start = () => {
     rollingTextRef.current.start();
@@ -26,39 +28,39 @@ export default (): React.ReactNode => {
 
   return (
     <DemoSection>
-      <DemoBlock card title="基础用法">
+      <DemoBlock card title={t.demoTitleBasic}>
         <RollingText startNum={0} targetNum={123} autoStart={isStart} />
         <div style={{ marginTop: '10px' }}>
           <Button onClick={() => setIsStart(true)} type="primary">
-            向下翻滚
+            {t.btnDown}
           </Button>
         </div>
       </DemoBlock>
-      <DemoBlock card title="设置翻滚方向">
+      <DemoBlock card title={t.demoTitleDirection}>
         <RollingText startNum={0} targetNum={432} direction="up" autoStart={isStart2} />
         <div style={{ marginTop: '10px' }}>
           <Button onClick={() => setIsStart2(true)} type="primary">
-            向上翻滚
+            {t.btnUp}
           </Button>
         </div>
       </DemoBlock>
-      <DemoBlock card title="设置各数位停止顺序">
+      <DemoBlock card title={t.demoTitleStopOrder}>
         <RollingText startNum={0} targetNum={54321} autoStart={isStart3} stopOrder="rtl" />
         <div style={{ marginTop: '10px' }}>
           <Button onClick={() => setIsStart3(true)} type="primary">
-            翻滚
+            {t.btnRoll}
           </Button>
         </div>
       </DemoBlock>
-      <DemoBlock card title="翻转非数字内容">
+      <DemoBlock card title={t.demoTitleText}>
         <RollingText textList={textList} autoStart={isStart4} stopOrder="rtl" />
         <div style={{ marginTop: '10px' }}>
           <Button onClick={() => setIsStart4(true)} type="primary">
-            翻滚
+            {t.btnRoll}
           </Button>
         </div>
       </DemoBlock>
-      <DemoBlock card title="自定义样式">
+      <DemoBlock card title={t.demoTitleCustomStyle}>
         <RollingText
           className="my-rolling-text"
           startNum={12345}
@@ -67,7 +69,7 @@ export default (): React.ReactNode => {
           height={54}
         />
       </DemoBlock>
-      <DemoBlock card title="手动控制">
+      <DemoBlock card title={t.demoTitleManual}>
         <RollingText
           ref={rollingTextRef}
           className="my-rolling-text"
@@ -77,8 +79,8 @@ export default (): React.ReactNode => {
           height={54}
         />
         <Grid columnNum={2} style={{ marginTop: '10px' }}>
-          <Grid.Item icon="play-circle-o" text="开始" onClick={start} />
-          <Grid.Item icon="replay" text="重置" onClick={reset} />
+          <Grid.Item icon="play-circle-o" text={t.gridStart} onClick={start} />
+          <Grid.Item icon="replay" text={t.gridReset} onClick={reset} />
         </Grid>
       </DemoBlock>
     </DemoSection>

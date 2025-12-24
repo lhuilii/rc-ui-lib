@@ -3,10 +3,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import { components } from 'site-mobile-demo';
 import { Cell, Button, Toast } from '../..';
 import Field from '..';
+import { useFieldDemoI18n } from './locale';
 import './style.less';
 
 export default (): React.ReactNode => {
   const { DemoBlock, DemoSection } = components;
+  const t = useFieldDemoI18n();
   const [value1, setValue1] = useState('');
   const [value2, setValue2] = useState('');
   const [tel, setTel] = useState('');
@@ -34,67 +36,67 @@ export default (): React.ReactNode => {
 
   return (
     <DemoSection>
-      <DemoBlock card title="基础用法">
+      <DemoBlock card title={t.demoTitleBasic}>
         <Field
           value={value1}
-          label="文本"
+          label={t.labelText}
           onChange={setValue1}
           name="123"
-          placeholder="请输入文本"
+          placeholder={t.placeholderText}
         />
       </DemoBlock>
 
-      <DemoBlock card title="自定义类型">
-        <Field value={value2} label="文本" onChange={setValue2} placeholder="请输入文本" />
-        <Field value={tel} type="tel" label="手机号" onChange={setTel} placeholder="请输入手机号" />
+      <DemoBlock card title={t.demoTitleType}>
+        <Field value={value2} label={t.labelText} onChange={setValue2} placeholder={t.placeholderText} />
+        <Field value={tel} type="tel" label={t.labelTel} onChange={setTel} placeholder={t.placeholderTel} />
         <Field
           value={digit}
           type="digit"
-          label="整数"
+          label={t.labelDigit}
           onChange={setDigit}
-          placeholder="请输入整数"
+          placeholder={t.placeholderDigit}
         />
         <Field
           value={number}
           type="number"
-          label="数字"
+          label={t.labelNumber}
           onChange={setNumber}
-          placeholder="请输入数字"
+          placeholder={t.placeholderNumber}
         />
         <Field
           value={password}
           type="password"
-          label="密码"
+          label={t.labelPassword}
           onChange={setPasswrod}
-          placeholder="请输入密码"
+          placeholder={t.placeholderPassword}
         />
       </DemoBlock>
 
-      <DemoBlock card title="禁用输入框">
+      <DemoBlock card title={t.demoTitleDisabled}>
         <Cell.Group>
-          <Field label="文本" value="输入框只读" readonly />
-          <Field label="文本" value="输入框已禁用" disabled />
+          <Field label={t.labelText} value={t.readonlyValue} readonly />
+          <Field label={t.labelText} value={t.disabledValue} disabled />
         </Cell.Group>
       </DemoBlock>
 
-      <DemoBlock card title="显示图标">
+      <DemoBlock card title={t.demoTitleIcon}>
         <Cell.Group>
           <Field
             value={value3}
-            label="文本"
+            label={t.labelText}
             leftIcon="shop-o"
             rightIcon="warning-o"
-            placeholder="显示图标"
-            onClickLeftIcon={() => Toast.info('左侧图标点击')}
+            placeholder={t.iconPlaceholder}
+            onClickLeftIcon={() => Toast.info('左侧图标点击')} // 文案用于调试输出，暂不做 i18n
             onClickRightIcon={() => Toast.info('右侧图标点击')}
             onChange={setValue3}
           />
           <Field
             value={value4}
             clearable
-            label="文本"
+            label={t.labelText}
             leftIcon="shop-o"
-            placeholder="显示清除图标"
+            placeholder={t.clearPlaceholder}
             onBlur={() => {
               console.log('onBlur');
             }}
@@ -106,108 +108,108 @@ export default (): React.ReactNode => {
         </Cell.Group>
       </DemoBlock>
 
-      <DemoBlock card title="提示信息">
-        <Field label="文本" placeholder="请输入文本" tooltip="success" />
+      <DemoBlock card title={t.demoTitleTooltip}>
+        <Field label={t.labelText} placeholder={t.tooltipPlaceholder} tooltip="success" />
       </DemoBlock>
 
-      <DemoBlock card title="错误提示">
+      <DemoBlock card title={t.demoTitleError}>
         <Cell.Group>
           <Field
             value={username}
             error
             required
-            label="用户名"
-            placeholder="请输入用户名"
+            label={t.labelUsername}
+            placeholder={t.placeholderUsername}
             onChange={setUsername}
           />
           <Field
             value={phone}
             required
-            label="手机号"
-            placeholder="请输入手机号"
-            errorMessage="手机号格式错误"
+            label={t.labelPhone}
+            placeholder={t.placeholderPhone}
+            errorMessage={t.phoneError}
             onChange={setPhone}
           />
         </Cell.Group>
       </DemoBlock>
 
-      <DemoBlock card title="插入按钮">
+      <DemoBlock card title={t.demoTitleButton}>
         <Field
           value={sms}
           center
           clearable
-          label="短信验证码"
-          placeholder="请输入短信验证码"
+          label={t.labelSms}
+          placeholder={t.placeholderSms}
           onChange={setSms}
           button={
             <Button size="small" type="primary">
-              发送
+              {t.send}
             </Button>
           }
         />
       </DemoBlock>
 
-      <DemoBlock card title="格式化输入内容">
+      <DemoBlock card title={t.demoTitleFormatter}>
         <Field
           value={value5}
-          label="文本"
+          label={t.labelText}
           formatter={formatter}
-          placeholder="在输入时执行格式化"
+          placeholder={t.formatterPlaceholder}
           onChange={setValue5}
         />
         <Field
           value={value6}
-          label="文本"
+          label={t.labelText}
           formatter={formatter}
           formatTrigger="onBlur"
-          placeholder="在失焦时执行格式化"
+          placeholder={t.formatterBlurPlaceholder}
           onChange={setValue6}
         />
       </DemoBlock>
 
-      <DemoBlock card title="高度自适应">
+      <DemoBlock card title={t.demoTitleAutosize}>
         <Field
           value={message}
           rows={1}
           autosize
-          label="留言"
+          label={t.labelMessage}
           type="textarea"
-          placeholder="请输入留言"
+          placeholder={t.placeholderMessage}
           onChange={setMessage}
         />
       </DemoBlock>
 
-      <DemoBlock card title="显示字数统计">
+      <DemoBlock card title={t.demoTitleWordLimit}>
         <Field
           value={message2}
           rows={2}
           autosize
-          label="留言"
+          label={t.labelMessage}
           type="textarea"
           maxlength={50}
-          placeholder="请输入留言"
+          placeholder={t.placeholderMessage}
           showWordLimit
           onChange={setMessage2}
         />
       </DemoBlock>
 
-      <DemoBlock card title="输入框内容对齐">
+      <DemoBlock card title={t.demoTitleAlign}>
         <Field
           value={value7}
-          label="文本"
-          placeholder="输入框内容右对齐"
+          label={t.labelText}
+          placeholder={t.placeholderRightAlign}
           inputAlign="right"
           onChange={setValue7}
         />
       </DemoBlock>
 
-      <DemoBlock card title="调用方法">
+      <DemoBlock card title={t.demoTitleMethod}>
         <Cell.Group>
           <Field
             center
             ref={fieldRef}
             value={value8}
-            label="文本"
+            label={t.labelText}
             onChange={setValue8}
             button={
               <Button
@@ -216,10 +218,10 @@ export default (): React.ReactNode => {
                   fieldRef?.current?.focus();
                 }}
               >
-                聚焦
+                {t.focus}
               </Button>
             }
-            placeholder="请输入文本"
+            placeholder={t.placeholderText}
           />
         </Cell.Group>
       </DemoBlock>

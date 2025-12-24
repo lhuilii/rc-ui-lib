@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { components } from 'site-mobile-demo';
 import { Toast } from '../..';
 import Slider from '..';
+import { useSliderDemoI18n } from './locale';
 import './style.less';
 
 export default (): React.ReactNode => {
@@ -15,17 +16,18 @@ export default (): React.ReactNode => {
   const [value6, setValue6] = useState(10);
   const [value7, setValue7] = useState(50);
   const [value8, setValue8] = useState<[number, number]>([20, 50]);
+  const t = useSliderDemoI18n();
 
-  const onChangeAfter = (v) => Toast.info(`当前值：${v}`);
+  const onChangeAfter = (v) => Toast.info(t.toastCurrentValue(v));
   return (
     <DemoSection className="demo-slider">
-      <DemoBlock title="基础用法">
+      <DemoBlock title={t.demoTitleBasic}>
         <Slider value={value1} onChange={setValue1} onChangeAfter={onChangeAfter} />
       </DemoBlock>
-      <DemoBlock title="双滑块">
+      <DemoBlock title={t.demoTitleRange}>
         <Slider range value={value2} onChange={setValue2} onChangeAfter={onChangeAfter} />
       </DemoBlock>
-      <DemoBlock title="指定选择范围">
+      <DemoBlock title={t.demoTitleMinMax}>
         <Slider
           value={value3}
           onChange={setValue3}
@@ -34,13 +36,13 @@ export default (): React.ReactNode => {
           max={50}
         />
       </DemoBlock>
-      <DemoBlock title="禁用">
+      <DemoBlock title={t.demoTitleDisabled}>
         <Slider value={10} disabled />
       </DemoBlock>
-      <DemoBlock title="指定步长">
+      <DemoBlock title={t.demoTitleStep}>
         <Slider value={value4} onChange={setValue4} onChangeAfter={onChangeAfter} step={10} />
       </DemoBlock>
-      <DemoBlock title="自定义样式">
+      <DemoBlock title={t.demoTitleCustomStyle}>
         <Slider
           value={value5}
           onChange={setValue5}
@@ -49,7 +51,7 @@ export default (): React.ReactNode => {
           activeColor="#ee0a24"
         />
       </DemoBlock>
-      <DemoBlock title="自定义按钮">
+      <DemoBlock title={t.demoTitleCustomButton}>
         <Slider
           value={value6}
           onChange={setValue6}
@@ -58,7 +60,7 @@ export default (): React.ReactNode => {
           button={<div className="custom-button">{value6}</div>}
         />
       </DemoBlock>
-      <DemoBlock title="垂直方向">
+      <DemoBlock title={t.demoTitleVertical}>
         <div style={{ height: 150, paddingLeft: 30 }}>
           <Slider
             vertical

@@ -26,6 +26,18 @@ const messages: Record<DemoLang, any> = {
     buyNow: '立即購買',
     addToCart: '加入購物車',
   },
+  'en-US': {
+    demoTitleBasic: 'Basic Usage',
+    demoTitleBadge: 'Badge',
+    demoTitleIconColor: 'Custom Icon Color',
+    demoTitleButtonColor: 'Custom Button Color',
+
+    service: 'Service',
+    cart: 'Cart',
+    shop: 'Shop',
+    buyNow: 'Buy Now',
+    addToCart: 'Add to Cart',
+  },
 };
 
 export const useActionBarDemoI18n = createDemoI18n(messages);

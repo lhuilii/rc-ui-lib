@@ -1,5 +1,5 @@
 import React, { useState, useRef, useMemo } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import classnames from 'classnames';
 
 import SearchInput from '../SearchInput';
@@ -7,9 +7,12 @@ import './index.less';
 
 const Header = (props) => {
   const versionRef = useRef(null);
+  const langRef = useRef(null);
   const { lang, config, versions, langConfigs } = props;
   const { pathname } = useLocation();
+  const navigate = useNavigate();
   const [showVersionPop, setShowVersionPop] = useState(false);
+  const [showLangPop, setShowLangPop] = useState(false);
 
   const checkHideVersionPop = (event) => {
     if (!versionRef.current.contains(event.target)) {
@@ -17,21 +20,42 @@ const Header = (props) => {
     }
   };
 
-  const anotherLang = useMemo(() => {
-    const items = langConfigs.filter((item) => item.lang !== lang);
-    if (items.length) {
-      return items[0];
+  const checkHideLangPop = (event) => {
+    if (!langRef.current.contains(event.target)) {
+      setShowLangPop(false);
     }
-    return {};
-  }, [pathname]);
+  };
 
-  const langLink = useMemo(() => {
-    return `#${pathname.replace(lang, anotherLang.lang)}`;
-  }, [pathname]);
+  const currentLangConfig = useMemo(() => {
+    return langConfigs.find((item) => item.lang === lang) || langConfigs[0];
+  }, [lang, langConfigs]);
 
-  const langLabel = useMemo(() => {
-    return anotherLang.label;
-  }, [pathname]);
+  const toggleLangPop = () => {
+    const val = !showLangPop;
+    const action = val ? 'add' : 'remove';
+    document.body[`${action}EventListener`]('click', checkHideLangPop);
+    setShowLangPop(val);
+  };
+
+  const onSwitchLang = (targetLang) => {
+    if (targetLang !== lang) {
+      // 替换路径中的语言部分
+      let newPath = pathname;
+      // 如果当前路径包含语言前缀，则替换
+      if (pathname.startsWith(`/${lang}/`)) {
+        newPath = pathname.replace(`/${lang}/`, `/${targetLang}/`);
+      } else if (pathname === `/${lang}` || pathname === `/${lang}/`) {
+        newPath = `/${targetLang}/`;
+      } else if (pathname.startsWith('/')) {
+        // 如果路径不包含语言，则添加语言前缀
+        newPath = `/${targetLang}${pathname}`;
+      } else {
+        newPath = `/${targetLang}/${pathname}`;
+      }
+      navigate(newPath);
+    }
+    setShowLangPop(false);
+  };
 
   const toggleVersionPop = () => {
     //@ts-ignore
@@ -99,11 +123,31 @@ const Header = (props) => {
                 </span>
               </li>
             )}
-            {langLabel && langLink && (
-              <li className="vant-doc-header__top-nav-item">
-                <a className="vant-doc-header__cube" href={langLink}>
-                  {langLabel}
-                </a>
+            {langConfigs && langConfigs.length > 1 && (
+              <li ref={langRef} className="vant-doc-header__top-nav-item">
+                <span
+                  className={classnames('vant-doc-header__cube vant-doc-header__lang', {
+                    'vant-doc-header__lang-multiple': langConfigs.length > 1,
+                  })}
+                  onClick={toggleLangPop}
+                >
+                  {currentLangConfig?.label || '中文'}
+                  {showLangPop && (
+                    <div className="vant-doc-header__lang-pop">
+                      {langConfigs.map((item) => (
+                        <div
+                          key={item.lang}
+                          className={classnames('vant-doc-header__lang-pop-item', {
+                            'vant-doc-header__lang-pop-item--active': item.lang === lang,
+                          })}
+                          onClick={() => onSwitchLang(item.lang)}
+                        >
+                          {item.label}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </span>
               </li>
             )}
           </ul>

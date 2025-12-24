@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { components } from 'site-mobile-demo';
 import { Cell, Toast, Field } from '../..';
 import { NumberKeyboard } from '..';
+import { useNumberKeyboardDemoI18n } from './locale';
 import './style.less';
 
 export default (): React.ReactNode => {
   const { DemoSection, DemoBlock } = components;
+  const t = useNumberKeyboardDemoI18n();
 
   const [visible, setVisible] = useState<any>('');
   const [value, setValue] = useState('');
@@ -23,14 +25,14 @@ export default (): React.ReactNode => {
 
   const actions = {
     onClose: () => {
-      Toast.info('closed');
+      Toast.info(t.toastClosed);
       setVisible('');
     },
     onInput: (key: string) => {
       Toast.info(key);
     },
     onDelete: () => {
-      Toast.info('delete');
+      Toast.info(t.toastDelete);
     },
     onBlur: () => {
       setVisible('');
@@ -41,18 +43,18 @@ export default (): React.ReactNode => {
 
   return (
     <DemoSection>
-      <DemoBlock card title="基础用法">
-        <Cell onClick={() => openKeyboard('default')}>弹出默认键盘</Cell>
-        <Cell onClick={() => openKeyboard('custom')}>弹出带右侧栏的键盘</Cell>
-        <Cell onClick={() => openKeyboard('extraKey')}>弹出身份证号键盘</Cell>
-        <Cell onClick={() => openKeyboard('title')}>弹出带标题的键盘</Cell>
-        <Cell onClick={() => openKeyboard('multiExtraKey')}>弹出配置多个按键的键盘</Cell>
-        <Cell onClick={() => openKeyboard('randomKeyOrder')}>弹出配置随机数字的键盘</Cell>
+      <DemoBlock card title={t.demoTitleBasic}>
+        <Cell onClick={() => openKeyboard('default')}>{t.cellDefault}</Cell>
+        <Cell onClick={() => openKeyboard('custom')}>{t.cellCustom}</Cell>
+        <Cell onClick={() => openKeyboard('extraKey')}>{t.cellId}</Cell>
+        <Cell onClick={() => openKeyboard('title')}>{t.cellTitle}</Cell>
+        <Cell onClick={() => openKeyboard('multiExtraKey')}>{t.cellMultiExtra}</Cell>
+        <Cell onClick={() => openKeyboard('randomKeyOrder')}>{t.cellRandom}</Cell>
         <Field
           onClick={() => openKeyboard('bindValue')}
-          label="绑定值"
+          label={t.fieldLabel}
           value={value}
-          placeholder="点此输入"
+          placeholder={t.fieldPlaceholder}
         />
       </DemoBlock>
       <NumberKeyboard
@@ -64,7 +66,7 @@ export default (): React.ReactNode => {
       />
       <NumberKeyboard
         visible={visible === 'custom'}
-        closeButtonText="完成"
+        closeButtonText={t.closeButtonText}
         theme="custom"
         extraKey="."
         onInput={actions.onInput}
@@ -73,7 +75,7 @@ export default (): React.ReactNode => {
       />
       <NumberKeyboard
         visible={visible === 'extraKey'}
-        closeButtonText="完成"
+        closeButtonText={t.closeButtonText}
         extraKey="X"
         onInput={actions.onInput}
         onDelete={actions.onDelete}
@@ -81,8 +83,8 @@ export default (): React.ReactNode => {
       />
       <NumberKeyboard
         visible={visible === 'title'}
-        title="自定义标题"
-        closeButtonText="完成"
+        title={t.title}
+        closeButtonText={t.closeButtonText}
         titleLeft={titleLeft}
         extraKey="."
         onInput={actions.onInput}
@@ -91,7 +93,7 @@ export default (): React.ReactNode => {
       />
       <NumberKeyboard
         visible={visible === 'multiExtraKey'}
-        closeButtonText="完成"
+        closeButtonText={t.closeButtonText}
         theme="custom"
         extraKey={['00', '.']}
         onInput={actions.onInput}
